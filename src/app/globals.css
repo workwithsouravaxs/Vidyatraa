@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #38bdf8; /* Sky Blue */
+  --color-secondary: #fbbf24; /* Yellow */
+  --color-accent: #34d399; /* Green */
+  --color-success: #f97316; /* Orange */
+  --color-navy: #0f172a;
+  
+  --font-fredoka: var(--font-fredoka);
+  --font-nunito: var(--font-nunito);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #fdfdfd;
+  --foreground: #0f172a;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito), Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Cartoon UI Utilities */
+.cartoon-card {
+  background-color: #ffffff;
+  border: 3px solid #0f172a;
+  border-radius: 1.25rem;
+  box-shadow: 4px 4px 0px 0px #0f172a;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cartoon-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px 0px #0f172a;
+}
+
+.cartoon-card-flat {
+  background-color: #ffffff;
+  border: 3px solid #0f172a;
+  border-radius: 1.25rem;
+}
+
+.cartoon-btn {
+  border: 3px solid #0f172a;
+  border-radius: 0.85rem;
+  box-shadow: 3px 3px 0px 0px #0f172a;
+  font-weight: 800;
+  font-family: var(--font-fredoka), sans-serif;
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cartoon-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px #0f172a;
+}
+
+.cartoon-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #0f172a;
+}
+
+.cartoon-btn-sky {
+  background-color: #38bdf8;
+  color: #0f172a;
+}
+
+.cartoon-btn-sky:hover {
+  background-color: #7dd3fc;
+}
+
+.cartoon-btn-yellow {
+  background-color: #fbbf24;
+  color: #0f172a;
+}
+
+.cartoon-btn-yellow:hover {
+  background-color: #fcd34d;
+}
+
+.cartoon-btn-green {
+  background-color: #34d399;
+  color: #0f172a;
+}
+
+.cartoon-btn-green:hover {
+  background-color: #6ee7b7;
+}
+
+.cartoon-btn-orange {
+  background-color: #f97316;
+  color: #ffffff;
+}
+
+.cartoon-btn-orange:hover {
+  background-color: #fb923c;
+}
+
+.cartoon-btn-white {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.cartoon-btn-white:hover {
+  background-color: #f8fafc;
+}
+
+/* Comic Speech Bubble styling */
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  border: 3px solid #0f172a;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.speech-bubble::after, .speech-bubble::before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+}
+
+.speech-bubble-left::after {
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #ffffff transparent transparent;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 0;
+  z-index: 1;
+}
+
+.speech-bubble-left::before {
+  border-width: 12px 12px 12px 0;
+  border-color: transparent #0f172a transparent transparent;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 0;
+  z-index: 0;
+}
+
+.speech-bubble-bottom::after {
+  border-width: 10px 10px 0 10px;
+  border-color: #ffffff transparent transparent transparent;
+  bottom: -10px;
+  left: 20px;
+  display: block;
+  width: 0;
+  z-index: 1;
+}
+
+.speech-bubble-bottom::before {
+  border-width: 12px 12px 0 12px;
+  border-color: #0f172a transparent transparent transparent;
+  bottom: -15px;
+  left: 18px;
+  display: block;
+  width: 0;
+  z-index: 0;
+}
+
+.speech-bubble-top::after {
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #ffffff transparent;
+  top: -10px;
+  left: 20px;
+  display: block;
+  width: 0;
+  z-index: 1;
+}
+
+.speech-bubble-top::before {
+  border-width: 0 12px 12px 12px;
+  border-color: transparent transparent #0f172a transparent;
+  top: -15px;
+  left: 18px;
+  display: block;
+  width: 0;
+  z-index: 0;
+}
+
+/* Custom Scrollbar for game aesthetics */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-left: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #fbbf24;
+  border: 2px solid #0f172a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+/* Animations */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
 }
