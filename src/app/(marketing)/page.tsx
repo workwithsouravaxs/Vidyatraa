@@ -104,100 +104,168 @@ export default function RedesignedHome() {
   if (!mounted) return null;
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50/50 text-slate-800 overflow-x-hidden font-poppins">
+    <div className="flex flex-col min-h-screen bg-[#fafafb] text-[#0f172a] overflow-x-hidden font-sans">
       
       {/* 🚀 1. The Hero Section (Introducing Vidyatraa) */}
-      <section className="relative flex flex-col items-center justify-center py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-50/70 via-indigo-50/30 to-transparent overflow-hidden">
-        {/* Floating gradient assets */}
-        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-300/10 blur-[120px] rounded-full pointer-events-none" />
+      <section className="relative overflow-hidden py-10 md:py-16 px-4 md:px-8 bg-gradient-to-tr from-sky-50/40 via-indigo-50/20 to-emerald-50/20">
+        {/* Soft floating background lights */}
+        <div className="absolute top-10 left-10 w-96 h-96 bg-blue-300/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-300/15 blur-[120px] rounded-full pointer-events-none" />
         
-        {/* Interactive Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a05_1px,transparent_1px),linear-gradient(to_bottom,#0f172a05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+        {/* Soft pattern grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a02_1px,transparent_1px),linear-gradient(to_bottom,#0f172a02_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto w-full text-center relative z-10 space-y-8">
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-4 py-1.5 rounded-full text-xs font-bold text-blue-600 shadow-sm"
-          >
-            <Sparkles size={13} className="text-amber-500 animate-pulse" />
-            <span>The Unified Student Success Ecosystem</span>
-          </motion.div>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 bg-blue-50/80 backdrop-blur-sm border border-blue-100/60 px-4 py-1.5 rounded-full text-xs font-bold text-blue-650 shadow-sm"
+            >
+              <Sparkles size={13} className="text-amber-500 animate-pulse" />
+              <span>The Unified Student Success Ecosystem</span>
+            </motion.div>
 
-          <div className="space-y-6">
             <motion.h1 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] text-slate-900 font-poppins"
+              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 font-poppins"
             >
               Master Your Exams.<br />
               Secure Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600">Future.</span>
             </motion.h1>
-            
+
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-slate-500 font-normal max-w-3xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-slate-500 font-medium max-w-xl leading-relaxed"
             >
               Vidyatraa is a single, unified environment built for Indian students. We combine secondary board exam preparation with AI-powered scholarship matching and student micro-projects, helping you excel in the classroom, build portfolios, and secure funding for your future studies.
             </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-4 pt-1"
+            >
+              <Link href="/courses">
+                <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer flex items-center gap-2 shadow-sm">
+                  <span>Explore Courses & Prep</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link href="/search">
+                <button className="bg-white hover:bg-slate-50 text-slate-700 font-bold py-3 px-6 rounded-xl border border-slate-200 transition-all duration-200 text-xs cursor-pointer shadow-sm">
+                  Find Scholarships
+                </button>
+              </Link>
+              <Link href="/internships">
+                <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer shadow-sm">
+                  View Internships
+                </button>
+              </Link>
+            </motion.div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-4 pt-4"
-          >
-            <Link href="/courses">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] shadow-[0_4px_20px_rgba(37,99,235,0.2)] text-xs cursor-pointer">
-                Explore Courses & Prep
-              </button>
-            </Link>
-            <Link href="/search">
-              <button className="bg-white hover:bg-slate-50 text-slate-800 font-bold py-3.5 px-8 rounded-2xl border border-slate-200 transition-all duration-200 transform hover:scale-[1.02] text-xs cursor-pointer shadow-sm">
-                Find Scholarships
-              </button>
-            </Link>
-            <Link href="/internships">
-              <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] text-xs cursor-pointer shadow-sm">
-                View Internships
-              </button>
-            </Link>
-          </motion.div>
+          {/* Interactive Modern UI Mockup (Authentic and Organic) */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+            <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-300/15 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-indigo-300/15 blur-[80px] rounded-full pointer-events-none" />
+            
+            <div className="relative w-full max-w-md bg-white/70 backdrop-blur-md border border-slate-200 rounded-[2rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-6">
+              {/* Header of mockup */}
+              <div className="flex justify-between items-center pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 bg-red-400/80 rounded-full" />
+                  <span className="w-2.5 h-2.5 bg-yellow-400/80 rounded-full" />
+                  <span className="w-2.5 h-2.5 bg-green-400/80 rounded-full" />
+                </div>
+                <span className="text-[10px] font-bold text-slate-400 tracking-wide uppercase">Vidyatraa Ecosystem Hub</span>
+              </div>
+              
+              {/* Feature Box 1: Mock Test Projections */}
+              <div className="p-4 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 border border-blue-100/50 rounded-2xl space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-[9px] font-extrabold text-blue-600 bg-blue-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">BOARD PREPARATION</span>
+                  <span className="text-[10px] text-slate-400 font-bold">Class 10 Prep</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h5 className="text-[11px] font-bold text-slate-500 font-poppins">Board Preparedness</h5>
+                    <p className="text-2xl font-black text-slate-900 mt-0.5">93.8%</p>
+                  </div>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-indigo-100 shadow-sm text-base">
+                    📈
+                  </div>
+                </div>
+                <div className="w-full bg-slate-200/50 h-2 rounded-full overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full" style={{ width: '93.8%' }} />
+                </div>
+              </div>
+              
+              {/* Feature Box 2: Course Progress & Mode Toggle */}
+              <div className="p-4 bg-indigo-50/40 border border-indigo-100/50 rounded-2xl flex items-center justify-between">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-extrabold text-indigo-600 bg-indigo-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">ACTIVE COURSE</span>
+                  <h4 className="text-xs font-extrabold text-slate-800 mt-1 font-poppins">Science & Technology</h4>
+                  <p className="text-[10px] text-slate-400 font-medium">Chapter 4: Carbon & Its Compounds</p>
+                </div>
+                {/* Light/Dark Mode Mock Toggle Switch */}
+                <div className="flex flex-col items-center gap-1.5 shrink-0">
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Theme Mode</span>
+                  <div className="w-10 h-5 bg-slate-200 rounded-full p-0.5 flex items-center justify-between border border-slate-350 select-none">
+                    <span className="text-[9px] leading-none pl-0.5">☀️</span>
+                    <div className="w-4 h-4 bg-[#0B3C91] rounded-full shadow-sm" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Feature Box 3: Internships Gig */}
+              <div className="p-4 bg-amber-50/40 border border-amber-100/50 rounded-2xl flex items-center justify-between">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-extrabold text-amber-600 bg-amber-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">ACTIVE INTERNSHIP</span>
+                  <h4 className="text-xs font-extrabold text-slate-800 mt-1">Translation & Proofreading</h4>
+                  <p className="text-[10px] text-slate-400 font-medium">Mentorship session scheduled for tomorrow</p>
+                </div>
+                <div className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-200/50 flex items-center justify-center text-amber-600 text-xs font-extrabold">
+                  ✍️
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 🚀 2. The Story: The Problems We Solve */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-100 bg-white">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto text-center space-y-16">
           <div className="space-y-4">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">The Challenge</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">The Challenge</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               Eliminating the Friction in Student Journeys
             </h2>
-            <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto font-medium">
               Every year, thousands of deserving students lose critical academic momentum and career funding due to three core friction points.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             {/* Friction 1 */}
-            <div className="p-8 rounded-3xl border border-slate-200/80 bg-slate-50/50 space-y-6 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div className="bg-[#fcfcff] border border-slate-200 rounded-[2rem] p-8 space-y-6 flex flex-col justify-between hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-4">
-                <div className="p-3 w-fit rounded-2xl bg-rose-50 border border-rose-100 text-rose-500">
+                <div className="p-3 w-fit rounded-2xl bg-rose-50 border border-rose-100/50 text-rose-500 shadow-sm">
                   <AlertTriangle size={24} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 font-poppins">1. Board Exam Stress & Cramming</h4>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+                <h4 className="text-lg font-bold text-slate-900">1. Board Exam Stress & Cramming</h4>
+                <p className="text-xs sm:text-sm text-slate-550 leading-relaxed font-medium">
                   Many secondary students study hard but lack clear revision notes, cheat sheets, and active mock diagnostics. This creates anxiety and limits potential before final board evaluations.
                 </p>
               </div>
-              <div className="border-t border-slate-200/60 pt-4 text-xs font-bold text-indigo-600 flex items-center gap-1.5 cursor-pointer">
-                <Link href="/courses" className="flex items-center gap-1 hover:text-indigo-700">
+              <div className="border-t border-slate-200 pt-5">
+                <Link href="/courses" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors">
                   <span>Explore Prep Wing</span>
                   <ChevronRight size={14} />
                 </Link>
@@ -205,18 +273,18 @@ export default function RedesignedHome() {
             </div>
 
             {/* Friction 2 */}
-            <div className="p-8 rounded-3xl border border-slate-200/80 bg-slate-50/50 space-y-6 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div className="bg-[#fcfcff] border border-slate-200 rounded-[2rem] p-8 space-y-6 flex flex-col justify-between hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-4">
-                <div className="p-3 w-fit rounded-2xl bg-amber-50 border border-amber-100 text-amber-500">
+                <div className="p-3 w-fit rounded-2xl bg-amber-50 border border-amber-100/50 text-amber-500 shadow-sm">
                   <FolderLock size={24} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 font-poppins">2. Hidden Grants & Rules</h4>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+                <h4 className="text-lg font-bold text-slate-900">2. Hidden Grants & Rules</h4>
+                <p className="text-xs sm:text-sm text-slate-550 leading-relaxed font-medium">
                   Over ₹1,000 crores in educational grants go unclaimed annually. Finding these opportunities on outdated web directories with complex income filters is discouraging for families.
                 </p>
               </div>
-              <div className="border-t border-slate-200/60 pt-4 text-xs font-bold text-indigo-600 flex items-center gap-1.5 cursor-pointer">
-                <Link href="/search" className="flex items-center gap-1 hover:text-indigo-700">
+              <div className="border-t border-slate-200 pt-5">
+                <Link href="/search" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-655 hover:text-blue-700 transition-colors">
                   <span>Explore Scholarship Hub</span>
                   <ChevronRight size={14} />
                 </Link>
@@ -224,18 +292,18 @@ export default function RedesignedHome() {
             </div>
 
             {/* Friction 3 */}
-            <div className="p-8 rounded-3xl border border-slate-200/80 bg-slate-50/50 space-y-6 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div className="bg-[#fcfcff] border border-slate-200 rounded-[2rem] p-8 space-y-6 flex flex-col justify-between hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-4">
-                <div className="p-3 w-fit rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-500">
+                <div className="p-3 w-fit rounded-2xl bg-emerald-50 border border-emerald-100/50 text-emerald-500 shadow-sm">
                   <Briefcase size={24} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 font-poppins">3. Lack of Portfolio & Gigs</h4>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+                <h4 className="text-lg font-bold text-slate-900">3. Lack of Portfolio & Gigs</h4>
+                <p className="text-xs sm:text-sm text-slate-550 leading-relaxed font-medium">
                   Applying academic knowledge to actual projects is rare. Students lack opportunities to gain micro-experience, earn pocket stipends, and build credentials for future admissions or jobs.
                 </p>
               </div>
-              <div className="border-t border-slate-200/60 pt-4 text-xs font-bold text-indigo-600 flex items-center gap-1.5 cursor-pointer">
-                <Link href="/internships" className="flex items-center gap-1 hover:text-indigo-700">
+              <div className="border-t border-slate-200 pt-5">
+                <Link href="/internships" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors">
                   <span>Explore Internships Wing</span>
                   <ChevronRight size={14} />
                 </Link>
@@ -246,28 +314,28 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 3. The Journey: How We Help You Grow */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/40 border-t border-slate-100">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/40 border-b border-slate-100">
         <div className="max-w-6xl mx-auto text-center space-y-16">
           <div className="space-y-4">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">The Roadmap</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">The Roadmap</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               How Vidyatraa Guides You
             </h2>
-            <p className="text-sm text-slate-500 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto font-medium">
               A single pipeline connecting school learning, credential building, and financial aid.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {[
-              { num: "01", step: "Structured Study", desc: "Read revision notes, formula guides, and equation summaries on our courses dashboard.", icon: BookOpen, color: "text-amber-500 bg-amber-50 border-amber-100" },
-              { num: "02", step: "Diagnostic Mock Practice", desc: "Attempt dynamic mock papers to build confidence and generate score projections.", icon: Activity, color: "text-rose-500 bg-rose-50 border-rose-100" },
-              { num: "03", step: "Match Scholarships", desc: "Check income and category requirements instantly using our AI filter logic.", icon: Search, color: "text-blue-500 bg-blue-50 border-blue-100" },
-              { num: "04", step: "Apply & Earn Gigs", desc: "Gather required documents, apply to financial aids, or start micro-internships.", icon: Award, color: "text-emerald-500 bg-emerald-50 border-emerald-100" }
+              { num: "01", step: "Structured Study", desc: "Read revision notes, formula guides, and equation summaries on our courses dashboard.", icon: BookOpen, color: "text-amber-500 bg-amber-500/10 border-amber-200" },
+              { num: "02", step: "Diagnostic Mock Practice", desc: "Attempt dynamic mock papers to build confidence and generate score projections.", icon: Activity, color: "text-rose-500 bg-rose-500/10 border-rose-200" },
+              { num: "03", step: "Match Scholarships", desc: "Check income and category requirements instantly using our AI filter logic.", icon: Search, color: "text-blue-500 bg-blue-500/10 border-blue-200" },
+              { num: "04", step: "Apply & Earn Gigs", desc: "Gather required documents, apply to financial aids, or start micro-internships.", icon: Award, color: "text-emerald-500 bg-emerald-500/10 border-emerald-200" }
             ].map((wk, idx) => {
               const Icon = wk.icon;
               return (
-                <div key={idx} className="bg-white p-6 border border-slate-200/80 rounded-3xl space-y-4 hover:shadow-sm transition-all">
+                <div key={idx} className="bg-white border border-slate-200 rounded-[2rem] p-6 space-y-4 hover:shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:-translate-y-0.5 transition-all duration-300">
                   <div className="flex justify-between items-start">
                     <div className={`p-3 rounded-2xl border ${wk.color}`}>
                       <Icon size={20} />
@@ -275,8 +343,8 @@ export default function RedesignedHome() {
                     <span className="text-xs font-bold text-slate-400">{wk.num}</span>
                   </div>
                   <div className="space-y-1.5">
-                    <h4 className="text-base font-bold text-slate-900 font-poppins">{wk.step}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-medium">{wk.desc}</p>
+                    <h4 className="text-base font-bold text-slate-900">{wk.step}</h4>
+                    <p className="text-xs text-slate-550 leading-relaxed font-medium">{wk.desc}</p>
                   </div>
                 </div>
               );
@@ -286,37 +354,37 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 4. Product Offerings (Prep, Scholarships, Internships) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto space-y-16">
           <div className="text-center space-y-4">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Features</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Features</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               Explore Our Core Portals
             </h2>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {/* WING A: Vidyatraa Prep */}
-            <div className="p-8 sm:p-12 rounded-3xl border border-slate-250/80 shadow-sm flex flex-col lg:flex-row gap-12 items-center hover:border-blue-300 transition-all">
+            <div className="p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 bg-slate-50/40 flex flex-col lg:flex-row gap-12 items-center hover:border-slate-300 transition-all duration-300">
               <div className="flex-1 space-y-6 text-left">
-                <div className="p-3 w-fit rounded-2xl bg-amber-50 border border-amber-100 text-amber-500">
+                <div className="p-3 w-fit rounded-2xl bg-amber-500/10 border border-amber-200 text-amber-600">
                   <GraduationCap size={28} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 font-poppins">
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-poppins">
                   Vidyatraa Prep & Courses
                 </h3>
-                <p className="text-sm leading-relaxed text-slate-550">
+                <p className="text-sm leading-relaxed text-slate-550 font-medium">
                   Study for your Class 10 board exams with premium study aids. We offer formula catalogs, interactive practice papers, dynamic doubt solvers, and mistake trackers that help you understand what went wrong on your tests.
                 </p>
                 <Link href="/courses">
-                  <button className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs shadow-md mt-2 cursor-pointer">
+                  <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 px-5 rounded-xl transition-all duration-200 text-xs cursor-pointer flex items-center gap-2 shadow-sm">
                     <span>Explore Learning Wing</span>
                     <ArrowRight size={14} />
                   </button>
                 </Link>
               </div>
 
-              <div className="w-full lg:w-96 shrink-0 bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-left space-y-3 font-semibold text-xs text-slate-700">
+              <div className="w-full lg:w-96 shrink-0 bg-white border border-slate-200 rounded-[2rem] p-6 text-left space-y-3 font-semibold text-xs text-slate-700 shadow-sm">
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Subject-wise Formula Cards</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Dynamic MCQ Mock Exams</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Personal Mistake Ledgers</p>
@@ -324,26 +392,26 @@ export default function RedesignedHome() {
             </div>
 
             {/* WING B: AI Scholarship Hub */}
-            <div className="p-8 sm:p-12 rounded-3xl border border-slate-250/80 shadow-sm flex flex-col lg:flex-row gap-12 items-center hover:border-indigo-300 transition-all">
+            <div className="p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 bg-slate-50/40 flex flex-col lg:flex-row gap-12 items-center hover:border-slate-300 transition-all duration-300">
               <div className="flex-1 space-y-6 text-left">
-                <div className="p-3 w-fit rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600">
+                <div className="p-3 w-fit rounded-2xl bg-indigo-500/10 border border-indigo-200 text-indigo-600">
                   <Award size={28} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 font-poppins">
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-poppins">
                   AI Scholarship Hub
                 </h3>
-                <p className="text-sm leading-relaxed text-slate-550">
+                <p className="text-sm leading-relaxed text-slate-555 font-medium">
                   Discover verified financial support opportunities. Our platform parses complex criteria, matches you with state and national databases, and generates checklists to make applications painless.
                 </p>
                 <Link href="/search">
-                  <button className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs shadow-md mt-2 cursor-pointer">
+                  <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-5 rounded-xl transition-all duration-200 text-xs cursor-pointer flex items-center gap-2 shadow-sm">
                     <span>Explore Funding Wing</span>
                     <ArrowRight size={14} />
                   </button>
                 </Link>
               </div>
 
-              <div className="w-full lg:w-96 shrink-0 bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-left space-y-3 font-semibold text-xs text-slate-700">
+              <div className="w-full lg:w-96 shrink-0 bg-white border border-slate-200 rounded-[2rem] p-6 text-left space-y-3 font-semibold text-xs text-slate-700 shadow-sm">
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> State Schemes (Telangana & AP SSC)</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> National Merit Schemes (PMSSS, etc.)</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Private Trust Scholarships</p>
@@ -351,26 +419,26 @@ export default function RedesignedHome() {
             </div>
 
             {/* WING C: Internships & Micro-Projects */}
-            <div className="p-8 sm:p-12 rounded-3xl border border-slate-250/80 shadow-sm flex flex-col lg:flex-row gap-12 items-center hover:border-emerald-300 transition-all">
+            <div className="p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 bg-slate-50/40 flex flex-col lg:flex-row gap-12 items-center hover:border-slate-300 transition-all duration-300">
               <div className="flex-1 space-y-6 text-left">
-                <div className="p-3 w-fit rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-500">
+                <div className="p-3 w-fit rounded-2xl bg-emerald-500/10 border border-emerald-200 text-emerald-600">
                   <Briefcase size={28} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 font-poppins">
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-poppins">
                   Micro-Internships & Projects
                 </h3>
-                <p className="text-sm leading-relaxed text-slate-550">
+                <p className="text-sm leading-relaxed text-slate-555 font-medium">
                   Apply your concepts to the real world. Secure pocket money stipends, build practical skills, work with mentors, and earn completion certificates to make your high school profile stand out.
                 </p>
                 <Link href="/internships">
-                  <button className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-650 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs shadow-md mt-2 cursor-pointer">
+                  <button className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-5 rounded-xl transition-all duration-200 text-xs cursor-pointer flex items-center gap-2 shadow-sm">
                     <span>Explore Internships Wing</span>
                     <ArrowRight size={14} />
                   </button>
                 </Link>
               </div>
 
-              <div className="w-full lg:w-96 shrink-0 bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-left space-y-3 font-semibold text-xs text-slate-700">
+              <div className="w-full lg:w-96 shrink-0 bg-white border border-slate-200 rounded-[2rem] p-6 text-left space-y-3 font-semibold text-xs text-slate-700 shadow-sm">
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Technical Micro Projects</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Content & Copywriting Gigs</p>
                 <p className="flex items-center gap-2 text-slate-800"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> Badges & Mentorship Programs</p>
@@ -380,38 +448,40 @@ export default function RedesignedHome() {
         </div>
       </section>
 
-      {/* 🌟 Highlighted Course Modules Section (Styled in Cartoon style used in Courses Section) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/40 border-t border-slate-100">
+      {/* 🌟 Highlighted Course Modules Section (Styled in a soft, premium organic layout) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#fdfdfd] border-b border-slate-100">
         <div className="max-w-6xl mx-auto text-center space-y-16">
           <div className="space-y-4">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Vidyatraa Prep Curriculum</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Vidyatraa Prep Curriculum</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               Featured Board Preparation Courses
             </h2>
-            <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed font-semibold">
               Explore subject-specific modules designed around CBSE and State Board guidelines to maximize your board exam success.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Mathematics Course", desc: "Structured guides covering Algebra, Geometry, Trigonometry, and Statistics. Includes 500+ solved board questions.", icon: BookOpen, bg: "bg-sky-100 text-sky-850 border-sky-300" },
-              { title: "Science & Technology", desc: "Physics, Chemistry, and Biology concept sheets, diagrams, and step-by-step chemical equations.", icon: Target, bg: "bg-indigo-100 text-indigo-800 border-indigo-300" },
-              { title: "AI Doubt Resolution", desc: "Scan and solve hard mathematical problems or physics equations instantly with step-by-step guidance.", icon: Sparkles, bg: "bg-amber-100 text-amber-800 border-amber-300" },
-              { title: "Full Syllabus Mock Simulator", desc: "Time-bound simulated board exam sessions mapping exactly to official marking matrices.", icon: Activity, bg: "bg-purple-100 text-purple-800 border-purple-300" },
-              { title: "Personalized Mistake Book", desc: "Keep track of questions you answered incorrectly during quizzes and revise them automatically.", icon: FileText, bg: "bg-rose-100 text-rose-800 border-rose-300" },
-              { title: "Daily Practice Challenges", desc: "Maintain your study streaks with quick 20-question revision tasks across math and science subjects.", icon: TrendingUp, bg: "bg-orange-100 text-orange-850 border-orange-300" }
+              { title: "Mathematics Course", desc: "Structured guides covering Algebra, Geometry, Trigonometry, and Statistics. Includes 500+ solved board questions.", icon: BookOpen, bg: "bg-sky-100/50 text-sky-850 border-sky-200" },
+              { title: "Science & Technology", desc: "Physics, Chemistry, and Biology concept sheets, diagrams, and step-by-step chemical equations.", icon: Target, bg: "bg-indigo-100/50 text-indigo-850 border-indigo-200" },
+              { title: "AI Doubt Resolution", desc: "Scan and solve hard mathematical problems or physics equations instantly with step-by-step guidance.", icon: Sparkles, bg: "bg-amber-100/50 text-amber-850 border-amber-200" },
+              { title: "Full Syllabus Mock Simulator", desc: "Time-bound simulated board exam sessions mapping exactly to official marking matrices.", icon: Activity, bg: "bg-purple-100/50 text-purple-800 border-purple-200" },
+              { title: "Personalized Mistake Book", desc: "Keep track of questions you answered incorrectly during quizzes and revise them automatically.", icon: FileText, bg: "bg-rose-100/50 text-rose-800 border-rose-200" },
+              { title: "Daily Practice Challenges", desc: "Maintain your study streaks with quick 20-question revision tasks across math and science subjects.", icon: TrendingUp, bg: "bg-orange-100/50 text-orange-850 border-orange-200" }
             ].map((course, idx) => {
               const Icon = course.icon;
               return (
-                <div key={idx} className="cartoon-card p-6 flex flex-col items-center text-center group bg-white shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] hover:translate-y-[-4px] hover:shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] transition-all">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 border-navy shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] ${course.bg} mb-4 text-navy group-hover:scale-110 transition-transform`}>
+                <div key={idx} className="bg-[#fafafb] border border-slate-200 rounded-[2rem] p-6 flex flex-col items-center text-center hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border border-slate-200 shadow-sm ${course.bg} mb-4 text-navy`}>
                     <Icon size={24} />
                   </div>
-                  <h3 className="text-xl font-extrabold text-navy mb-2 font-poppins">{course.title}</h3>
-                  <p className="text-sm font-semibold text-slate-500 leading-relaxed mb-6 flex-grow">{course.desc}</p>
-                  <Link href="/courses" className="cartoon-btn cartoon-btn-yellow text-xs px-6 py-2.5 shadow-[1.5px_1.5px_0px_0px_rgba(15,23,42,1)] w-full">
-                    Explore Prep Wing
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{course.title}</h3>
+                  <p className="text-xs text-slate-550 leading-relaxed mb-6 flex-grow font-semibold">{course.desc}</p>
+                  <Link href="/courses" className="w-full">
+                    <button className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 rounded-xl w-full transition-all duration-200 shadow-sm cursor-pointer">
+                      Explore Prep Wing
+                    </button>
                   </Link>
                 </div>
               );
@@ -421,43 +491,43 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 5. Why Choose Vidyatraa */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 text-left space-y-6">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Quality & Trust</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins leading-tight">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Quality & Trust</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins leading-tight">
               A Platform Built for Deserving Students
             </h2>
             <p className="text-sm text-slate-500 leading-relaxed font-medium">
               We eliminate stress and lack of information. We build portals that help students understand their core performance and assist EWS families in funding college tuition.
             </p>
 
-            <div className="flex gap-4 items-center p-4 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm">
-              <div className="p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-emerald-500">
+            <div className="flex gap-4 items-center p-4 bg-slate-50/60 border border-slate-200 rounded-2xl shadow-sm">
+              <div className="p-3 bg-emerald-500/10 border border-emerald-200 rounded-xl text-[#0f172a]">
                 <ShieldCheck size={24} />
               </div>
               <div className="text-left space-y-0.5">
-                <h5 className="font-bold text-slate-900 text-sm font-poppins">100% Audited Directory</h5>
-                <p className="text-xs text-slate-500 leading-normal">Every single scholarship listing is verified by our team.</p>
+                <h5 className="font-extrabold text-slate-900 text-sm">100% Audited Directory</h5>
+                <p className="text-xs text-slate-550 font-bold">Every single scholarship listing is verified by our team.</p>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
             {[
-              { title: "AI Eligibility Match", body: "Filter by state, income levels, and academic criteria to find matches instantly.", icon: Sparkles, color: "text-amber-500 bg-amber-50 border-amber-100" },
-              { title: "Structured Curriculum", body: "Access revision notes and formulas structured around Class 10 board guidelines.", icon: GraduationCap, color: "text-blue-500 bg-blue-50 border-blue-100" },
-              { title: "Diagnostic Mock Papers", body: "Solve mock questions to build confidence, identify gaps, and calculate projections.", icon: FileText, color: "text-rose-500 bg-rose-50 border-rose-100" },
-              { title: "Portfolio Building", body: "Excel in class and work on student internships to stand out from other candidates.", icon: Briefcase, color: "text-emerald-500 bg-emerald-50 border-emerald-100" }
+              { title: "AI Eligibility Match", body: "Filter by state, income levels, and academic criteria to find matches instantly.", icon: Sparkles, color: "bg-amber-500/10 border-amber-200 text-amber-600" },
+              { title: "Structured Curriculum", body: "Access revision notes and formulas structured around Class 10 board guidelines.", icon: GraduationCap, color: "bg-sky-500/10 border-sky-200 text-blue-600" },
+              { title: "Diagnostic Mock Papers", body: "Solve mock questions to build confidence, identify gaps, and calculate projections.", icon: FileText, color: "bg-rose-500/10 border-rose-200 text-rose-500" },
+              { title: "Portfolio Building", body: "Excel in class and work on student internships to stand out from other candidates.", icon: Briefcase, color: "bg-emerald-500/10 border-emerald-200 text-emerald-600" }
             ].map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={idx} className="p-6 bg-white border border-slate-200/80 rounded-3xl space-y-3 hover:shadow-sm transition-all">
-                  <div className={`p-2.5 w-fit rounded-xl border ${item.color}`}>
+                <div key={idx} className="bg-slate-50/60 border border-slate-200 rounded-[2rem] p-6 space-y-3 hover:bg-white hover:shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:-translate-y-0.5 transition-all duration-300">
+                  <div className={`p-2.5 w-fit rounded-xl border-2 border-slate-200 ${item.color}`}>
                     <Icon size={18} />
                   </div>
-                  <h4 className="text-base font-bold text-slate-900 font-poppins">{item.title}</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">{item.body}</p>
+                  <h4 className="text-base font-extrabold text-slate-900">{item.title}</h4>
+                  <p className="text-xs font-semibold text-slate-500 leading-relaxed">{item.body}</p>
                 </div>
               );
             })}
@@ -466,52 +536,55 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 6. Ecosystem Specs */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/40 border-t border-slate-100">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/30 border-b border-slate-100">
         <div className="max-w-6xl mx-auto text-center space-y-12">
           <div className="space-y-3">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Specifications</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Specifications</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               Ecosystem Platform Specifications
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {platformCapabilities.map((m, idx) => (
-              <div key={idx} className="p-6 border border-slate-200 rounded-3xl bg-white flex flex-col justify-between">
+              <div key={idx} className="bg-white border border-slate-200 rounded-[2rem] p-6 flex flex-col justify-between hover:shadow-[0_15px_30px_rgba(0,0,0,0.02)] transition-all duration-300">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{m.title}</span>
-                  <h4 className="text-base font-bold text-slate-900 leading-snug font-poppins">{m.label}</h4>
+                  <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest bg-blue-50/80 px-2.5 py-0.5 rounded border border-blue-100/50 w-fit inline-block">{m.title}</span>
+                  <h4 className="text-base font-bold text-slate-900 leading-snug">{m.label}</h4>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium mt-6">{m.description}</p>
+                <p className="text-xs font-semibold text-slate-500 leading-relaxed mt-6">{m.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 🚀 7. Testimonials */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
+      {/* 🚀 7. Testimonials (Organic speech blockquotes) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto text-center space-y-14">
           <div className="space-y-3">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Feedback</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Feedback</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               What Students & Parents Say
             </h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {testimonials.map((test, idx) => (
-              <div key={idx} className="flex flex-col items-center bg-slate-50/50 border border-slate-200 rounded-3xl p-6 md:p-8 text-left hover:shadow-sm transition-all">
-                <p className="text-xs sm:text-sm leading-relaxed italic mb-6 text-slate-500 font-medium">
-                  &ldquo;{test.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-slate-100 w-full">
-                  <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shadow-sm ${test.colorClass}`}>
+              <div key={idx} className="bg-slate-50/50 border border-slate-200 rounded-[2rem] p-8 flex flex-col justify-between hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 h-full">
+                <div className="space-y-4">
+                  <span className="text-4xl text-indigo-300/60 font-serif leading-none select-none">“</span>
+                  <p className="text-xs sm:text-sm leading-relaxed italic -mt-2 text-slate-655 font-semibold">
+                    &ldquo;{test.quote}&rdquo;
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 mt-8 pt-4 border-t border-slate-100/80 w-full">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-650 text-white flex items-center justify-center text-xs font-bold shadow-md shrink-0">
                     {test.initials}
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-slate-900 font-poppins">{test.author}</p>
-                    <p className="text-[10px] text-slate-500 font-semibold">{test.meta}</p>
+                    <p className="text-xs font-bold text-slate-900">{test.author}</p>
+                    <p className="text-[10px] text-slate-400 font-bold">{test.meta}</p>
                   </div>
                 </div>
               </div>
@@ -521,11 +594,11 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 8. FAQs */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/40 border-t border-slate-100">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/30 border-b border-slate-100">
         <div className="max-w-3xl mx-auto text-center space-y-12">
           <div className="space-y-3">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider">Support</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-poppins">
+            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Support</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
               Frequently Asked Questions
             </h2>
           </div>
@@ -536,11 +609,11 @@ export default function RedesignedHome() {
               return (
                 <div 
                   key={idx} 
-                  className="border border-slate-200 rounded-2xl overflow-hidden transition-all bg-white"
+                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300"
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full p-5 flex justify-between items-center text-left text-xs sm:text-sm font-bold text-slate-900 focus:outline-none font-poppins"
+                    className="w-full p-5 flex justify-between items-center text-left text-sm font-extrabold text-slate-800 focus:outline-none font-poppins"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isOpen ? "transform rotate-180" : ""}`} />
@@ -553,9 +626,9 @@ export default function RedesignedHome() {
                         animate={{ height: "auto" }}
                         exit={{ height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden border-t border-slate-200 bg-slate-50/50"
+                        className="overflow-hidden border-t border-slate-100 bg-slate-50/50"
                       >
-                        <p className="p-5 text-xs leading-relaxed font-medium text-slate-500 text-left">
+                        <p className="p-5 text-xs leading-relaxed font-semibold text-slate-500 text-left">
                           {faq.a}
                         </p>
                       </motion.div>
@@ -569,30 +642,30 @@ export default function RedesignedHome() {
       </section>
 
       {/* 🚀 9. Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-blue-50/60 border-t border-slate-100 relative overflow-hidden">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-tr from-sky-50/40 via-indigo-50/30 to-violet-50/40 border-t border-slate-100 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 font-poppins leading-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Build Your Knowledge. Secure Your Funding.
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm font-semibold text-slate-500 max-w-xl mx-auto leading-relaxed">
             Access board preparation syllabus tools on Vidyatraa Prep, or match with verified government and private scholarship opportunities.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 pt-4">
             <Link href="/courses">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] shadow-[0_4px_20px_rgba(37,99,235,0.2)] text-xs cursor-pointer">
+              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer shadow-sm">
                 Start Learning
               </button>
             </Link>
             <Link href="/search">
-              <button className="bg-white hover:bg-slate-50 text-slate-800 font-bold py-3.5 px-8 rounded-2xl border border-slate-200 transition-all duration-200 transform hover:scale-[1.02] text-xs cursor-pointer shadow-sm">
+              <button className="bg-white hover:bg-slate-50 text-slate-700 font-bold py-3 px-6 rounded-xl border border-slate-200 transition-all duration-200 text-xs cursor-pointer shadow-sm">
                 Find Scholarships
               </button>
             </Link>
             <Link href="/internships">
-              <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] text-xs cursor-pointer shadow-sm">
+              <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer shadow-sm">
                 Apply to Internships
               </button>
             </Link>
