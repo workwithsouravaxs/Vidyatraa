@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -25,7 +25,7 @@ export default function PerformanceDashboard() {
     setMounted(true);
 
     // Load mock test history
-    const stored = localStorage.getItem("boardbuddy_history");
+    const stored = localStorage.getItem("vidyatraa_history");
     if (stored) {
       try {
         setHistory(JSON.parse(stored));
@@ -41,7 +41,7 @@ export default function PerformanceDashboard() {
         { id: 4, subject: "Science", score: 100, date: "07/08", correct: 3, total: 3 },
       ];
       setHistory(defaultHistory);
-      localStorage.setItem("boardbuddy_history", JSON.stringify(defaultHistory));
+      localStorage.setItem("vidyatraa_history", JSON.stringify(defaultHistory));
     }
   }, []);
 
@@ -338,3 +338,4 @@ export default function PerformanceDashboard() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default function Navbar() {
 
   useEffect(() => {
     // Load student profile if exists
-    const stored = localStorage.getItem("boardbuddy_student");
+    const stored = localStorage.getItem("vidyatraa_student");
     if (stored) {
       try {
         const profile = JSON.parse(stored);
@@ -74,11 +74,11 @@ export default function Navbar() {
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem("boardbuddy_student");
+    localStorage.removeItem("vidyatraa_student");
     router.push("/");
   };
 
-  const isLanding = pathname === "/";
+  const isLanding = pathname === "/" || pathname === "/courses";
   const isAuth = pathname === "/auth";
 
   if (isAuth) return null;
@@ -88,14 +88,24 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Logo */}
-        <Link href={isLanding ? "/" : "/dashboard"} className="flex items-center gap-2 select-none group">
+        <Link href="/" className="flex items-center gap-2 select-none group">
           <div className="bg-primary border-3 border-navy rounded-2xl p-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] group-hover:scale-105 transition-transform">
             <span className="text-xl md:text-2xl font-bold text-white">🎓</span>
           </div>
           <span className="text-2xl font-bold font-fredoka tracking-wide text-navy">
-            Board<span className="text-primary">Buddy</span>
+            Vidya<span className="text-primary">traa</span>
           </span>
         </Link>
+
+        {/* Desktop Navigation Links for Landing Pages */}
+        {isLanding && (
+          <div className="hidden lg:flex items-center gap-6 text-sm font-black text-navy">
+            <Link href="/about" className="hover:text-primary transition-colors">About Us</Link>
+            <Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link>
+            <Link href="/scholarships" className="hover:text-primary transition-colors">Find Scholarships</Link>
+            <Link href="/courses" className="hover:text-primary transition-colors">Courses</Link>
+          </div>
+        )}
 
         {/* Desktop Navigation Links */}
         {!isLanding && (
@@ -313,3 +323,4 @@ function SparklesIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -81,7 +81,7 @@ export default function CareerRoadmaps() {
       colleges: ["IIT Hyderabad (B.Tech AI)", "IIIT Bangalore", "Manipal Institute of Technology", "Vellore Institute of Technology (VIT)"],
       roadmap: [
         { title: "Class 10 Boards", desc: "Ace algebra, functions, and basic logic.", emoji: "🎓" },
-        { title: "Self Study & Python", desc: "Learn basic coding via BoardBuddy guidelines.", emoji: "💻" },
+        { title: "Self Study & Python", desc: "Learn basic coding via Vidyatraa guidelines.", emoji: "💻" },
         { title: "Advanced Degree", desc: "Secure B.Tech/BCA in Data Science & Artificial Intelligence.", emoji: "🏛️" },
         { title: "AI Research Deploy", desc: "Deploy GenAI apps or work on LLM fine-tuning.", emoji: "🤖" },
       ],
@@ -254,3 +254,4 @@ function ChevronArrowRight({ active }: { active: boolean }) {
     </span>
   );
 }
+

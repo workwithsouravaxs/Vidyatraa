@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -167,7 +167,7 @@ export default function StudyResources() {
   const [subjects, setSubjects] = useState<Subject[]>(initialSubjects);
 
   useEffect(() => {
-    const storedRes = localStorage.getItem("boardbuddy_resources_list");
+    const storedRes = localStorage.getItem("vidyatraa_resources_list");
     if (storedRes) {
       try {
         setSubjects(JSON.parse(storedRes));
@@ -175,7 +175,7 @@ export default function StudyResources() {
         console.error(e);
       }
     } else {
-      localStorage.setItem("boardbuddy_resources_list", JSON.stringify(initialSubjects));
+      localStorage.setItem("vidyatraa_resources_list", JSON.stringify(initialSubjects));
     }
   }, []);
 
@@ -635,3 +635,4 @@ export default function StudyResources() {
     </div>
   );
 }
+

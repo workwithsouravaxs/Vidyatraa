@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Fredoka, Nunito } from "next/font/google";
+import { Fredoka, Nunito, Poppins } from "next/font/google";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider, App as AntdApp } from "antd";
+import { AuthProvider } from "@/context/AuthContext";
+import AIAssistant from "@/components/AIAssistant";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -14,9 +18,15 @@ const nunito = Nunito({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "BoardBuddy – Your Best Friend for Class 10 Board Exams",
-  description: "Ace your Class 10 board exams with confidence! Gamified study resources, Mock Tests, AI Practice Paper Generator, AI Doubt Solver, Career roadmaps, and scholarships — all for just ₹69.",
+  title: "Vidyatraa | AI-Powered Scholarships & Class 10 Prep",
+  description: "Vidyatraa is a unified student platform. Find, match, and apply for educational scholarships, plus ace your Class 10 board exams with Vidyatraa Prep mock tests and AI study helpers.",
   icons: {
     icon: "/favicon.ico",
   }
@@ -30,10 +40,35 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fredoka.variable} ${nunito.variable} h-full antialiased`}
+      className={`${fredoka.variable} ${nunito.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#fdfdfd] text-[#0f172a]">
-        {children}
+        <AntdRegistry>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#0B3C91",
+                borderRadius: 12,
+                fontFamily: "var(--font-nunito), var(--font-poppins)",
+              },
+              components: {
+                Button: {
+                  controlHeight: 40,
+                  fontWeight: 600,
+                },
+              },
+            }}
+          >
+            <AntdApp>
+              <AuthProvider>
+                <div className="flex flex-col min-h-screen">
+                  {children}
+                </div>
+                <AIAssistant />
+              </AuthProvider>
+            </AntdApp>
+          </ConfigProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

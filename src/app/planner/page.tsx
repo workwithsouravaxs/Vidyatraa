@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -93,7 +93,7 @@ export default function RevisionPlanner() {
           });
           
           // Add small XP to profile
-          const stored = localStorage.getItem("boardbuddy_student");
+          const stored = localStorage.getItem("vidyatraa_student");
           if (stored) {
             try {
               const profile = JSON.parse(stored);
@@ -102,7 +102,7 @@ export default function RevisionPlanner() {
                 xp: profile.xp + 20,
                 level: Math.floor((profile.xp + 20) / 400) + 1,
               };
-              localStorage.setItem("boardbuddy_student", JSON.stringify(updatedProfile));
+              localStorage.setItem("vidyatraa_student", JSON.stringify(updatedProfile));
             } catch (e) {
               console.error(e);
             }
@@ -363,3 +363,4 @@ export default function RevisionPlanner() {
     </div>
   );
 }
+

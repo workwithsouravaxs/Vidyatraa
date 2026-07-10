@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
@@ -74,7 +74,7 @@ export default function ScholarshipHub() {
   const [scholarships, setScholarships] = useState<Scholarship[]>(initialScholarships);
 
   useEffect(() => {
-    const storedSch = localStorage.getItem("boardbuddy_scholarships_list");
+    const storedSch = localStorage.getItem("vidyatraa_scholarships_list");
     if (storedSch) {
       try {
         setScholarships(JSON.parse(storedSch));
@@ -82,7 +82,7 @@ export default function ScholarshipHub() {
         console.error(e);
       }
     } else {
-      localStorage.setItem("boardbuddy_scholarships_list", JSON.stringify(initialScholarships));
+      localStorage.setItem("vidyatraa_scholarships_list", JSON.stringify(initialScholarships));
     }
   }, []);
 
@@ -112,7 +112,7 @@ export default function ScholarshipHub() {
     if (appliedIds.includes(id)) return;
 
     setBuddyState("thinking");
-    setBuddyMsg("Submitting scholarship file with your synced Class 10 BoardBuddy records... 📤");
+    setBuddyMsg("Submitting scholarship file with your synced Class 10 Vidyatraa records... 📤");
 
     setTimeout(() => {
       setAppliedIds([...appliedIds, id]);
@@ -324,3 +324,4 @@ export default function ScholarshipHub() {
     </div>
   );
 }
+

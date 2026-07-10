@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
@@ -22,7 +22,7 @@ export default function ParentDashboard() {
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("boardbuddy_student");
+    const stored = localStorage.getItem("vidyatraa_student");
     if (stored) {
       try {
         const profile = JSON.parse(stored);
@@ -32,7 +32,7 @@ export default function ParentDashboard() {
       }
     }
 
-    const storedHistory = localStorage.getItem("boardbuddy_history");
+    const storedHistory = localStorage.getItem("vidyatraa_history");
     if (storedHistory) {
       try {
         setHistory(JSON.parse(storedHistory));
@@ -229,3 +229,4 @@ export default function ParentDashboard() {
     </div>
   );
 }
+

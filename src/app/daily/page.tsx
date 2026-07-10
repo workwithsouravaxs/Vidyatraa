@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -75,7 +75,7 @@ export default function DailyPractice() {
   ];
 
   useEffect(() => {
-    const stored = localStorage.getItem("boardbuddy_student");
+    const stored = localStorage.getItem("vidyatraa_student");
     if (stored) {
       try {
         setStats(JSON.parse(stored));
@@ -138,7 +138,7 @@ export default function DailyPractice() {
       };
 
       setStats(updated);
-      localStorage.setItem("boardbuddy_student", JSON.stringify(updated));
+      localStorage.setItem("vidyatraa_student", JSON.stringify(updated));
 
       // Confetti fire!
       confetti({
@@ -379,3 +379,4 @@ export default function DailyPractice() {
     </div>
   );
 }
+

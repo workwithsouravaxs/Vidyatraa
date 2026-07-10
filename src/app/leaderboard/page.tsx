@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { Trophy, Award, Medal, Shield, Search } from "lucide-react";
@@ -19,7 +19,7 @@ export default function Leaderboard() {
   const [studentName, setStudentName] = useState("Rahul");
 
   useEffect(() => {
-    const stored = localStorage.getItem("boardbuddy_student");
+    const stored = localStorage.getItem("vidyatraa_student");
     if (stored) {
       try {
         const profile = JSON.parse(stored);
@@ -173,3 +173,4 @@ export default function Leaderboard() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar } from "recharts";
@@ -81,11 +81,11 @@ export default function AdminDashboard() {
   const [allScholarships, setAllScholarships] = useState<AdminScholarship[]>([]);
 
   // Mascot dynamic messages
-  const [buddyMsg, setBuddyMsg] = useState("Welcome back to the BoardBuddy Command Deck! Tap any control tab to execute operations. 🛡️");
+  const [buddyMsg, setBuddyMsg] = useState("Welcome back to the Vidyatraa Command Deck! Tap any control tab to execute operations. 🛡️");
   const [buddyState, setBuddyState] = useState<"idle" | "wave" | "thinking" | "happy" | "cheer">("idle");
 
   const refreshChaptersList = () => {
-    const storedRes = localStorage.getItem("boardbuddy_resources_list");
+    const storedRes = localStorage.getItem("vidyatraa_resources_list");
     if (storedRes) {
       try {
         const parsed = JSON.parse(storedRes);
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
   };
 
   const refreshScholarshipsList = () => {
-    const storedSch = localStorage.getItem("boardbuddy_scholarships_list");
+    const storedSch = localStorage.getItem("vidyatraa_scholarships_list");
     if (storedSch) {
       try {
         setAllScholarships(JSON.parse(storedSch));
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
 
     // Initial load from localStorage
     let currentStudents: StudentData[] = [];
-    const storedStudents = localStorage.getItem("boardbuddy_students_list");
+    const storedStudents = localStorage.getItem("vidyatraa_students_list");
     if (storedStudents) {
       try {
         currentStudents = JSON.parse(storedStudents);
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
     }
 
     // Dynamic injection of active logged-in student
-    const storedLogged = localStorage.getItem("boardbuddy_student");
+    const storedLogged = localStorage.getItem("vidyatraa_student");
     if (storedLogged) {
       try {
         const logged = JSON.parse(storedLogged);
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
           const matched = currentStudents.find((s) => s.name.toLowerCase() === logged.name.toLowerCase());
           if (matched && matched.status !== logged.status) {
             logged.status = matched.status;
-            localStorage.setItem("boardbuddy_student", JSON.stringify(logged));
+            localStorage.setItem("vidyatraa_student", JSON.stringify(logged));
           }
         }
       } catch (e) {
@@ -161,18 +161,18 @@ export default function AdminDashboard() {
       }
     }
     setStudents(currentStudents);
-    localStorage.setItem("boardbuddy_students_list", JSON.stringify(currentStudents));
+    localStorage.setItem("vidyatraa_students_list", JSON.stringify(currentStudents));
 
-    const storedCoupons = localStorage.getItem("boardbuddy_coupons");
+    const storedCoupons = localStorage.getItem("vidyatraa_coupons");
     if (storedCoupons) {
       setCoupons(JSON.parse(storedCoupons));
     } else {
       const baseCoupons = ["BUDDY20", "ACE100", "PASS69"];
       setCoupons(baseCoupons);
-      localStorage.setItem("boardbuddy_coupons", JSON.stringify(baseCoupons));
+      localStorage.setItem("vidyatraa_coupons", JSON.stringify(baseCoupons));
     }
 
-    const storedBroadcast = localStorage.getItem("boardbuddy_broadcast");
+    const storedBroadcast = localStorage.getItem("vidyatraa_broadcast");
     if (storedBroadcast) {
       setCurrentBroadcast(storedBroadcast);
     }
@@ -203,13 +203,13 @@ export default function AdminDashboard() {
           s.status === "Active" ? "Expired" : "Active";
         
         // Also update currently logged-in student if names match!
-        const storedLogged = localStorage.getItem("boardbuddy_student");
+        const storedLogged = localStorage.getItem("vidyatraa_student");
         if (storedLogged) {
           try {
             const logged = JSON.parse(storedLogged);
             if (logged.name.toLowerCase() === s.name.toLowerCase()) {
               logged.status = nextStatus;
-              localStorage.setItem("boardbuddy_student", JSON.stringify(logged));
+              localStorage.setItem("vidyatraa_student", JSON.stringify(logged));
             }
           } catch (e) {
             console.error(e);
@@ -220,7 +220,7 @@ export default function AdminDashboard() {
       return s;
     });
     setStudents(updated);
-    localStorage.setItem("boardbuddy_students_list", JSON.stringify(updated));
+    localStorage.setItem("vidyatraa_students_list", JSON.stringify(updated));
     setBuddyState("happy");
     setBuddyMsg("Student subscription status toggled successfully! Sync active. 🔄");
   };
@@ -229,7 +229,7 @@ export default function AdminDashboard() {
     e.preventDefault();
     if (!broadcastText.trim()) return;
 
-    localStorage.setItem("boardbuddy_broadcast", broadcastText);
+    localStorage.setItem("vidyatraa_broadcast", broadcastText);
     setCurrentBroadcast(broadcastText);
     setBroadcastText("");
     setBuddyState("cheer");
@@ -239,7 +239,7 @@ export default function AdminDashboard() {
   };
 
   const handleClearBroadcast = () => {
-    localStorage.removeItem("boardbuddy_broadcast");
+    localStorage.removeItem("vidyatraa_broadcast");
     setCurrentBroadcast("");
     setBuddyState("idle");
     setBuddyMsg("System banner alert dismissed from all user platforms.");
@@ -249,7 +249,7 @@ export default function AdminDashboard() {
     const randomCode = `BUDDY${Math.floor(Math.random() * 900) + 100}`;
     const nextCoupons = [...coupons, randomCode];
     setCoupons(nextCoupons);
-    localStorage.setItem("boardbuddy_coupons", JSON.stringify(nextCoupons));
+    localStorage.setItem("vidyatraa_coupons", JSON.stringify(nextCoupons));
     setBuddyState("happy");
     setBuddyMsg(`Gained +1 coupon: ${randomCode}! Active in Landing Checkout.`);
 
@@ -264,7 +264,7 @@ export default function AdminDashboard() {
   const handleDeleteCoupon = (code: string) => {
     const nextCoupons = coupons.filter((c) => c !== code);
     setCoupons(nextCoupons);
-    localStorage.setItem("boardbuddy_coupons", JSON.stringify(nextCoupons));
+    localStorage.setItem("vidyatraa_coupons", JSON.stringify(nextCoupons));
     setBuddyState("thinking");
     setBuddyMsg(`Promo code ${code} deleted from database.`);
   };
@@ -276,7 +276,7 @@ export default function AdminDashboard() {
       return;
     }
 
-    const storedRes = localStorage.getItem("boardbuddy_resources_list");
+    const storedRes = localStorage.getItem("vidyatraa_resources_list");
     let resourcesDatabase: any[] = [];
     if (storedRes) {
       resourcesDatabase = JSON.parse(storedRes);
@@ -312,7 +312,7 @@ export default function AdminDashboard() {
       });
     }
 
-    localStorage.setItem("boardbuddy_resources_list", JSON.stringify(resourcesDatabase));
+    localStorage.setItem("vidyatraa_resources_list", JSON.stringify(resourcesDatabase));
     
     // Clear inputs
     setNewChapName("");
@@ -329,7 +329,7 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteChapter = (subjectName: string, chapId: number) => {
-    const storedRes = localStorage.getItem("boardbuddy_resources_list");
+    const storedRes = localStorage.getItem("vidyatraa_resources_list");
     if (storedRes) {
       try {
         const parsed = JSON.parse(storedRes);
@@ -342,7 +342,7 @@ export default function AdminDashboard() {
           }
           return sub;
         });
-        localStorage.setItem("boardbuddy_resources_list", JSON.stringify(nextDatabase));
+        localStorage.setItem("vidyatraa_resources_list", JSON.stringify(nextDatabase));
         refreshChaptersList();
         setBuddyState("thinking");
         setBuddyMsg("Chapter deleted successfully and synchronized! 🗑️");
@@ -374,7 +374,7 @@ export default function AdminDashboard() {
       return;
     }
 
-    const storedSch = localStorage.getItem("boardbuddy_scholarships_list");
+    const storedSch = localStorage.getItem("vidyatraa_scholarships_list");
     let scholarshipDatabase: AdminScholarship[] = [];
     if (storedSch) {
       scholarshipDatabase = JSON.parse(storedSch);
@@ -394,7 +394,7 @@ export default function AdminDashboard() {
     };
 
     scholarshipDatabase.push(nextSch);
-    localStorage.setItem("boardbuddy_scholarships_list", JSON.stringify(scholarshipDatabase));
+    localStorage.setItem("vidyatraa_scholarships_list", JSON.stringify(scholarshipDatabase));
 
     // Clear inputs
     setSchName("");
@@ -410,12 +410,12 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteScholarship = (schId: number) => {
-    const storedSch = localStorage.getItem("boardbuddy_scholarships_list");
+    const storedSch = localStorage.getItem("vidyatraa_scholarships_list");
     if (storedSch) {
       try {
         const parsed = JSON.parse(storedSch);
         const updated = parsed.filter((s: any) => s.id !== schId);
-        localStorage.setItem("boardbuddy_scholarships_list", JSON.stringify(updated));
+        localStorage.setItem("vidyatraa_scholarships_list", JSON.stringify(updated));
         refreshScholarshipsList();
         setBuddyState("thinking");
         setBuddyMsg("Scholarship scheme deleted successfully from database! 🗑️");
@@ -1091,3 +1091,4 @@ function SparklesIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+

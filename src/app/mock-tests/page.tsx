@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -153,7 +153,7 @@ export default function MockTestSimulator() {
     }
 
     // Save test history to localStorage for analytics
-    const storedHistory = localStorage.getItem("boardbuddy_history");
+    const storedHistory = localStorage.getItem("vidyatraa_history");
     let history = [];
     if (storedHistory) {
       try {
@@ -170,10 +170,10 @@ export default function MockTestSimulator() {
       correct,
       total: activeQuestions.length,
     });
-    localStorage.setItem("boardbuddy_history", JSON.stringify(history));
+    localStorage.setItem("vidyatraa_history", JSON.stringify(history));
 
     // Update student XP/Coins for attempting tests
-    const storedStudent = localStorage.getItem("boardbuddy_student");
+    const storedStudent = localStorage.getItem("vidyatraa_student");
     if (storedStudent) {
       try {
         const profile = JSON.parse(storedStudent);
@@ -185,7 +185,7 @@ export default function MockTestSimulator() {
           coins: profile.coins + coinsGained,
           level: Math.floor((profile.xp + xpGained) / 400) + 1,
         };
-        localStorage.setItem("boardbuddy_student", JSON.stringify(updated));
+        localStorage.setItem("vidyatraa_student", JSON.stringify(updated));
       } catch (e) {
         console.error(e);
       }
@@ -298,7 +298,7 @@ export default function MockTestSimulator() {
             {/* Header controls bar */}
             <div className="lg:col-span-12 cartoon-card-flat bg-slate-900 text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-xl font-bold font-fredoka">BoardBuddy Simulator</span>
+                <span className="text-xl font-bold font-fredoka">Vidyatraa Simulator</span>
                 <span className="bg-slate-800 text-xs px-3 py-1 rounded-full font-black border border-slate-700">
                   {subject}
                 </span>
@@ -577,3 +577,4 @@ export default function MockTestSimulator() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
@@ -105,7 +105,7 @@ function AuthContent() {
       level: 4,
       streak: 5,
     };
-    localStorage.setItem("boardbuddy_student", JSON.stringify(defaultProfile));
+    localStorage.setItem("vidyatraa_student", JSON.stringify(defaultProfile));
     
     setTimeout(() => {
       router.push("/dashboard");
@@ -127,7 +127,7 @@ function AuthContent() {
       setBuddyMsg("Woohoo! You're all set! Check out your custom dashboard! 🎉");
       
       // Save data
-      localStorage.setItem("boardbuddy_student", JSON.stringify(onboardData));
+      localStorage.setItem("vidyatraa_student", JSON.stringify(onboardData));
       
       // Fire confetti
       confetti({
@@ -159,7 +159,7 @@ function AuthContent() {
       level: 2,
       streak: 3,
     };
-    localStorage.setItem("boardbuddy_student", JSON.stringify(googleProfile));
+    localStorage.setItem("vidyatraa_student", JSON.stringify(googleProfile));
 
     setTimeout(() => {
       router.push("/dashboard");
@@ -343,7 +343,7 @@ function AuthContent() {
                   </button>
 
                   <p className="text-center font-bold text-xs text-slate-500 mt-6">
-                    New to BoardBuddy?{" "}
+                    New to Vidyatraa?{" "}
                     <button onClick={() => setMode("signup")} className="text-primary hover:underline font-extrabold">
                       Create Account
                     </button>
@@ -619,10 +619,11 @@ export default function AuthPage() {
     <Suspense fallback={
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 font-bold text-navy text-sm">
         <div className="w-10 h-10 border-4 border-dashed border-primary rounded-full animate-spin mb-4"></div>
-        <span>Loading BoardBuddy Onboarding... 🚀</span>
+        <span>Loading Vidyatraa Onboarding... 🚀</span>
       </div>
     }>
       <AuthContent />
     </Suspense>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Load student profile
-    const stored = localStorage.getItem("boardbuddy_student");
+    const stored = localStorage.getItem("vidyatraa_student");
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
@@ -61,7 +61,7 @@ export default function Dashboard() {
       }
     }
 
-    const storedAlert = localStorage.getItem("boardbuddy_broadcast");
+    const storedAlert = localStorage.getItem("vidyatraa_broadcast");
     if (storedAlert) {
       setBroadcast(storedAlert);
     }
@@ -101,7 +101,7 @@ export default function Dashboard() {
             level: Math.floor((profile.xp + m.xp) / 400) + 1, // Simple level up formula
           };
           setProfile(updatedProfile);
-          localStorage.setItem("boardbuddy_student", JSON.stringify(updatedProfile));
+          localStorage.setItem("vidyatraa_student", JSON.stringify(updatedProfile));
         } else {
           setBuddyState("idle");
           setBuddyMsg("Alright, you can attempt it later. Let's keep moving!");
@@ -129,7 +129,7 @@ export default function Dashboard() {
       coins: profile.coins + coinReward,
     };
     setProfile(updatedProfile);
-    localStorage.setItem("boardbuddy_student", JSON.stringify(updatedProfile));
+    localStorage.setItem("vidyatraa_student", JSON.stringify(updatedProfile));
 
     setClaimedDays([...claimedDays, dayNum]);
     setBuddyState("cheer");
@@ -396,7 +396,7 @@ export default function Dashboard() {
             <div className="text-5xl mb-4">😢</div>
             <h3 className="text-2xl font-extrabold font-fredoka text-navy mb-2">Subscription Expired!</h3>
             <p className="text-xs md:text-sm font-bold text-slate-500 mb-6 leading-relaxed text-left">
-              Your BoardBuddy plan is currently inactive. Renew for ₹69/month to restore unlimited access to Mock Exams, AI Doubt Solvers, and daily challenges!
+              Your Vidyatraa plan is currently inactive. Renew for ₹69/month to restore unlimited access to Mock Exams, AI Doubt Solvers, and daily challenges!
             </p>
 
             {/* Input Promo Code */}
@@ -414,7 +414,7 @@ export default function Dashboard() {
                   
                   // Read generated coupons
                   let coupons = ["BUDDY20", "ACE100", "PASS69"];
-                  const storedCoupons = localStorage.getItem("boardbuddy_coupons");
+                  const storedCoupons = localStorage.getItem("vidyatraa_coupons");
                   if (storedCoupons) {
                     try { coupons = JSON.parse(storedCoupons); } catch (e) {}
                   }
@@ -423,15 +423,15 @@ export default function Dashboard() {
                     // Update localStorage profile back to Active
                     const updated = { ...profile, status: "Active" as const };
                     setProfile(updated);
-                    localStorage.setItem("boardbuddy_student", JSON.stringify(updated));
+                    localStorage.setItem("vidyatraa_student", JSON.stringify(updated));
                     
                     // Also update in students_list
-                    const storedList = localStorage.getItem("boardbuddy_students_list");
+                    const storedList = localStorage.getItem("vidyatraa_students_list");
                     if (storedList) {
                       try {
                         const parsedList = JSON.parse(storedList);
                         const nextList = parsedList.map((s: any) => s.name === profile.name ? { ...s, status: "Active" } : s);
-                        localStorage.setItem("boardbuddy_students_list", JSON.stringify(nextList));
+                        localStorage.setItem("vidyatraa_students_list", JSON.stringify(nextList));
                       } catch(e) {}
                     }
 
@@ -453,15 +453,15 @@ export default function Dashboard() {
                 onClick={() => {
                   const updated = { ...profile, status: "Active" as const };
                   setProfile(updated);
-                  localStorage.setItem("boardbuddy_student", JSON.stringify(updated));
+                  localStorage.setItem("vidyatraa_student", JSON.stringify(updated));
                   
                   // Also update in students_list
-                  const storedList = localStorage.getItem("boardbuddy_students_list");
+                  const storedList = localStorage.getItem("vidyatraa_students_list");
                   if (storedList) {
                     try {
                       const parsedList = JSON.parse(storedList);
                       const nextList = parsedList.map((s: any) => s.name === profile.name ? { ...s, status: "Active" } : s);
-                      localStorage.setItem("boardbuddy_students_list", JSON.stringify(nextList));
+                      localStorage.setItem("vidyatraa_students_list", JSON.stringify(nextList));
                     } catch(e) {}
                   }
 
@@ -488,3 +488,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
