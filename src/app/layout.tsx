@@ -25,10 +25,71 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Vidyatraa | AI-Powered Scholarships & Class 10 Prep",
-  description: "Vidyatraa is a unified student platform. Find, match, and apply for educational scholarships, plus ace your Class 10 board exams with Vidyatraa Prep mock tests and AI study helpers.",
+  metadataBase: new URL("https://vidyatraa.vercel.app"),
+  title: {
+    default: "Vidyatraa | AI-Powered Scholarships & Class 10 Board Prep",
+    template: "%s | Vidyatraa"
+  },
+  description: "Vidyatraa is India's unified student success ecosystem. Match with verified scholarships, prepare for Class 10 boards with diagnostic mock tests & formula cheat sheets, and earn pocket stipends through student micro-internships.",
+  keywords: [
+    "Vidyatraa",
+    "Vidyatraa Prep",
+    "Scholarships for Indian students",
+    "Class 10 board exam prep",
+    "CBSE Class 10 Mock Tests",
+    "SSC mock tests",
+    "State board formula sheets",
+    "EWS student scholarships",
+    "AI scholarship matcher",
+    "Student micro-internships",
+    "School student gigs",
+    "Class 10 revision notes",
+    "Educational financial aid India",
+    "Pre-matric scholarships",
+    "Post-matric scholarships",
+    "Indian education grants"
+  ],
+  authors: [{ name: "Vidyatraa Team" }],
+  creator: "Vidyatraa Team",
+  publisher: "Vidyatraa",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://vidyatraa.vercel.app",
+    title: "Vidyatraa | AI-Powered Scholarships & Class 10 Board Prep",
+    description: "Match with verified scholarships, prepare for Class 10 boards with diagnostic mock tests, and earn pocket stipends through student micro-internships.",
+    siteName: "Vidyatraa",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 800,
+        alt: "Vidyatraa Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vidyatraa | AI-Powered Scholarships & Class 10 Board Prep",
+    description: "Unified student ecosystem for board exam preparation, verified scholarships matching, and student work opportunities.",
+    images: ["/logo.png"],
+  },
   icons: {
     icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "https://vidyatraa.vercel.app",
   }
 };
 
