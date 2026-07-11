@@ -7,6 +7,7 @@ import { Search, Filter, MapPin, Calendar, IndianRupee, ArrowRight, Bookmark, Ta
 
 const { Option } = Select;
 
+import { useRouter } from 'next/navigation';
 import { scholarshipService, Scholarship } from '@/services/scholarshipService';
 import { useAuth } from '@/context/AuthContext';
 import AuthModal from '@/components/AuthModal';
@@ -23,6 +24,7 @@ const INDIAN_STATES = [
 
 const SearchPage = () => {
   const { user } = useAuth();
+  const router = useRouter();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [scholarships, setScholarships] = useState<Scholarship[]>([]);
@@ -156,7 +158,7 @@ const SearchPage = () => {
                       type="primary" 
                       size="large" 
                       className="h-14 px-10 rounded-xl bg-primary text-lg"
-                      onClick={() => setIsAuthModalOpen(true)}
+                      onClick={() => router.push('/auth?mode=signup')}
                     >
                       Explore All <ArrowRight className="ml-2" size={20} />
                     </Button>
@@ -167,7 +169,6 @@ const SearchPage = () => {
           </div>
         </div>
       </main>
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} initialTab="signup" />
     </div>
   );
 };

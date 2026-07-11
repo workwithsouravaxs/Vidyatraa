@@ -24,12 +24,66 @@ import {
   AlertTriangle,
   HelpCircle,
   FolderLock,
-  Briefcase
+  Briefcase,
+  Flame,
+  Trophy,
+  Landmark
 } from 'lucide-react';
 
 export default function RedesignedHome() {
   const [mounted, setMounted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const features = [
+    {
+      title: "Study Notes",
+      desc: "Chapter-wise formula sheets, revision cards, and summaries.",
+      icon: BookOpen,
+      bg: "bg-sky-100 text-sky-800 border-sky-300",
+    },
+    {
+      title: "Practice Papers",
+      desc: "Customize difficulty and topics to generate model exams.",
+      icon: Sparkles,
+      bg: "bg-amber-100 text-amber-800 border-amber-300",
+    },
+    {
+      title: "AI Doubt Solver",
+      desc: "Get instant step-by-step friendly solutions to any query.",
+      icon: Search,
+      bg: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    },
+    {
+      title: "Mock Tests",
+      desc: "Real-time board exam simulation with timers and scoring.",
+      icon: Award,
+      bg: "bg-purple-100 text-purple-800 border-purple-300",
+    },
+    {
+      title: "Daily Practice",
+      desc: "Quick 20-question randomized challenges to build XP streaks.",
+      icon: Flame,
+      bg: "bg-orange-100 text-orange-850 border-orange-300",
+    },
+    {
+      title: "Progress Tracker",
+      desc: "Watch your levels rise, track accuracy, and review weak areas.",
+      icon: Trophy,
+      bg: "bg-rose-100 text-rose-800 border-rose-300",
+    },
+    {
+      title: "Career Guidance",
+      desc: "Explore tailored roadmaps from science to entrepreneurship.",
+      icon: Landmark,
+      bg: "bg-indigo-100 text-indigo-850 border-indigo-300",
+    },
+    {
+      title: "Scholarship Hub",
+      desc: "Search, filter, and apply to nationwide financial aid options.",
+      icon: UserCheck,
+      bg: "bg-teal-100 text-teal-850 border-teal-300",
+    },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -448,44 +502,46 @@ export default function RedesignedHome() {
         </div>
       </section>
 
-      {/* 🌟 Highlighted Course Modules Section (Styled in a soft, premium organic layout) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#fdfdfd] border-b border-slate-100">
-        <div className="max-w-6xl mx-auto text-center space-y-16">
-          <div className="space-y-4">
-            <span className="text-xs text-blue-600 font-bold uppercase tracking-wider bg-blue-50 border border-blue-100/60 px-3.5 py-1 rounded-full shadow-sm inline-block">Vidyatraa Prep Curriculum</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
+      {/* 🌟 Highlighted Course Modules Section (Styled identically to the Course Tab) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b-4 border-navy scroll-mt-10">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-5xl font-extrabold font-fredoka text-navy mb-4">
               Featured Board Preparation Courses
             </h2>
-            <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed font-semibold">
+            <p className="text-lg text-slate-500 font-medium max-w-xl mx-auto">
               Explore subject-specific modules designed around CBSE and State Board guidelines to maximize your board exam success.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: "Mathematics Course", desc: "Structured guides covering Algebra, Geometry, Trigonometry, and Statistics. Includes 500+ solved board questions.", icon: BookOpen, bg: "bg-sky-100/50 text-sky-850 border-sky-200" },
-              { title: "Science & Technology", desc: "Physics, Chemistry, and Biology concept sheets, diagrams, and step-by-step chemical equations.", icon: Target, bg: "bg-indigo-100/50 text-indigo-850 border-indigo-200" },
-              { title: "AI Doubt Resolution", desc: "Scan and solve hard mathematical problems or physics equations instantly with step-by-step guidance.", icon: Sparkles, bg: "bg-amber-100/50 text-amber-850 border-amber-200" },
-              { title: "Full Syllabus Mock Simulator", desc: "Time-bound simulated board exam sessions mapping exactly to official marking matrices.", icon: Activity, bg: "bg-purple-100/50 text-purple-800 border-purple-200" },
-              { title: "Personalized Mistake Book", desc: "Keep track of questions you answered incorrectly during quizzes and revise them automatically.", icon: FileText, bg: "bg-rose-100/50 text-rose-800 border-rose-200" },
-              { title: "Daily Practice Challenges", desc: "Maintain your study streaks with quick 20-question revision tasks across math and science subjects.", icon: TrendingUp, bg: "bg-orange-100/50 text-orange-850 border-orange-200" }
-            ].map((course, idx) => {
-              const Icon = course.icon;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feat, idx) => {
+              const Icon = feat.icon;
               return (
-                <div key={idx} className="bg-[#fafafb] border border-slate-200 rounded-[2rem] p-6 flex flex-col items-center text-center hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border border-slate-200 shadow-sm ${course.bg} mb-4 text-navy`}>
+                <motion.div
+                  key={feat.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="cartoon-card p-6 flex flex-col items-center text-center group"
+                >
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 border-navy shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] ${feat.bg} mb-4 text-navy group-hover:scale-110 transition-transform`}>
                     <Icon size={24} />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{course.title}</h3>
-                  <p className="text-xs text-slate-550 leading-relaxed mb-6 flex-grow font-semibold">{course.desc}</p>
-                  <Link href="/courses" className="w-full">
-                    <button className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 rounded-xl w-full transition-all duration-200 shadow-sm cursor-pointer">
-                      Explore Prep Wing
-                    </button>
-                  </Link>
-                </div>
+                  <h3 className="text-xl font-extrabold font-fredoka text-navy mb-2">{feat.title}</h3>
+                  <p className="text-sm font-semibold text-slate-550 leading-relaxed">{feat.desc}</p>
+                </motion.div>
               );
             })}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link href="/courses">
+              <button className="cartoon-btn cartoon-btn-yellow text-sm px-8 py-3.5 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]">
+                Explore Learning Wing 🚀
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -641,34 +697,75 @@ export default function RedesignedHome() {
         </div>
       </section>
 
-      {/* 🚀 9. Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-tr from-sky-50/40 via-indigo-50/30 to-violet-50/40 border-t border-slate-100 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* 🚀 9. Final CTA (Playful, Extraordinary Neo-Brutalist redesign) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-sky-50/50 border-t-4 border-navy relative overflow-hidden">
+        {/* Bobbing animated background emojis */}
+        <div className="absolute top-12 left-10 text-4xl select-none opacity-20 animate-bounce-slow">📚</div>
+        <div className="absolute bottom-12 right-12 text-4xl select-none opacity-20 animate-bounce-slow" style={{ animationDelay: "1s" }}>💰</div>
+        <div className="absolute top-1/3 right-10 text-4xl select-none opacity-20 animate-bounce-slow" style={{ animationDelay: "2s" }}>🎓</div>
+        <div className="absolute bottom-1/3 left-12 text-4xl select-none opacity-20 animate-bounce-slow" style={{ animationDelay: "1.5s" }}>⚡</div>
 
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Build Your Knowledge. Secure Your Funding.
-          </h2>
-          <p className="text-sm font-semibold text-slate-500 max-w-xl mx-auto leading-relaxed">
-            Access board preparation syllabus tools on Vidyatraa Prep, or match with verified government and private scholarship opportunities.
-          </p>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="cartoon-card bg-gradient-to-br from-yellow-50 to-amber-50 p-8 sm:p-14 border-3 border-navy shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] text-center space-y-8">
+            <div className="space-y-4">
+              <span className="bg-primary text-white border-2 border-navy text-xs font-black uppercase px-4 py-1.5 rounded-full shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] inline-block">
+                Start Your Journey Today
+              </span>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-fredoka text-navy leading-tight">
+                Build Your Knowledge.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-650">Secure Your Funding.</span>
+              </h2>
+              <p className="text-sm sm:text-base font-bold text-slate-650 max-w-xl mx-auto leading-relaxed">
+                Access structured Class 10 board preparation guidelines on Vidyatraa Prep, match with verified government and private scholarship opportunities, or start earn-and-learn micro-internships!
+              </p>
+            </div>
 
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Link href="/courses">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer shadow-sm">
-                Start Learning
-              </button>
-            </Link>
-            <Link href="/search">
-              <button className="bg-white hover:bg-slate-50 text-slate-700 font-bold py-3 px-6 rounded-xl border border-slate-200 transition-all duration-200 text-xs cursor-pointer shadow-sm">
-                Find Scholarships
-              </button>
-            </Link>
-            <Link href="/internships">
-              <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-xs cursor-pointer shadow-sm">
-                Apply to Internships
-              </button>
-            </Link>
+            {/* Visual split preview cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 text-left">
+              <div className="cartoon-card-flat bg-white border-2 border-navy p-5 space-y-3 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-0.5 transition-transform">
+                <span className="text-3xl">📚</span>
+                <h4 className="font-extrabold font-fredoka text-navy text-base">Vidyatraa Prep</h4>
+                <p className="text-xs text-slate-500 font-bold leading-relaxed">
+                  Formula cards, chapter summaries, personalized mistake logbooks, and score predictors.
+                </p>
+              </div>
+
+              <div className="cartoon-card-flat bg-white border-2 border-navy p-5 space-y-3 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-0.5 transition-transform">
+                <span className="text-3xl">💰</span>
+                <h4 className="font-extrabold font-fredoka text-navy text-base">Scholarship Hub</h4>
+                <p className="text-xs text-slate-500 font-bold leading-relaxed">
+                  100% verified state, national, and trust financial aid schemes matched to your eligibility.
+                </p>
+              </div>
+
+              <div className="cartoon-card-flat bg-white border-2 border-navy p-5 space-y-3 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-0.5 transition-transform">
+                <span className="text-3xl">💼</span>
+                <h4 className="font-extrabold font-fredoka text-navy text-base">Student Internships</h4>
+                <p className="text-xs text-slate-500 font-bold leading-relaxed">
+                  Real micro-projects, translation, writing, and digital tasks curated for high-school students.
+                </p>
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap justify-center gap-4 pt-6 border-t-2 border-dashed border-navy/25">
+              <Link href="/courses">
+                <button className="cartoon-btn cartoon-btn-sky px-8 py-3.5 text-xs sm:text-sm shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] flex items-center gap-2">
+                  <span>Start Learning</span>
+                  <ArrowRight size={16} />
+                </button>
+              </Link>
+              <Link href="/search">
+                <button className="cartoon-btn cartoon-btn-yellow px-8 py-3.5 text-xs sm:text-sm shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]">
+                  Find Scholarships 💸
+                </button>
+              </Link>
+              <Link href="/internships">
+                <button className="cartoon-btn cartoon-btn-white px-8 py-3.5 text-xs sm:text-sm shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] bg-slate-900 text-white hover:bg-slate-800">
+                  Apply to Internships 💼
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form, Input, Select, InputNumber, Button, Card, Steps, Result, Typography, Space } from 'antd';
 import { CheckCircle2, Search, ArrowRight, User, MapPin, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import AuthModal from '@/components/AuthModal';
 
@@ -22,6 +23,7 @@ const INDIAN_STATES = [
 
 const EligibilityPage = () => {
   const { user } = useAuth();
+  const router = useRouter();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -29,7 +31,7 @@ const EligibilityPage = () => {
 
   const onFinish = (values: unknown) => {
     if (!user) {
-      setIsAuthModalOpen(true);
+      router.push('/auth?mode=signup');
       return;
     }
     setLoading(true);
@@ -172,7 +174,6 @@ const EligibilityPage = () => {
           )}
         </Card>
       </main>
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} initialTab="signup" />
     </div>
   );
 };

@@ -55,15 +55,13 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image 
-              src="/logo.png" 
-              alt="Vidyatraa Logo" 
-              width={240} 
-              height={80} 
-              className="object-contain h-14 w-auto"
-              priority
-            />
+          <Link href="/" className="flex items-center gap-2 select-none group">
+            <div className="bg-primary border-3 border-navy rounded-2xl p-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] group-hover:scale-105 transition-transform flex items-center justify-center">
+              <span className="text-xl font-bold text-white">🎓</span>
+            </div>
+            <span className="text-2xl font-bold font-fredoka tracking-wide text-navy">
+              Vidya<span className="text-primary">traa</span>
+            </span>
           </Link>
 
           {/* Desktop Menu */}
@@ -97,20 +95,22 @@ const Navbar = () => {
               </Space>
             ) : (
               <Space>
-                <Button 
-                  type="text" 
-                  className="font-semibold"
-                  onClick={() => setAuthModal({ open: true, tab: 'login' })}
-                >
-                  Login
-                </Button>
-                <Button 
-                  type="primary" 
-                  className="bg-primary hover:bg-primary/90 rounded-xl"
-                  onClick={() => setAuthModal({ open: true, tab: 'signup' })}
-                >
-                  Join Now
-                </Button>
+                <Link href="/auth?mode=login">
+                  <Button 
+                    type="text" 
+                    className="font-semibold cursor-pointer"
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/auth?mode=signup">
+                  <Button 
+                    type="primary" 
+                    className="bg-primary hover:bg-primary/90 rounded-xl cursor-pointer"
+                  >
+                    Join Now
+                  </Button>
+                </Link>
               </Space>
             )}
           </div>
@@ -167,32 +167,31 @@ const Navbar = () => {
             </>
           ) : (
             <div className="flex flex-col space-y-3">
-              <Button 
-                block 
-                size="large"
-                onClick={() => { setAuthModal({ open: true, tab: 'login' }); setVisible(false); }}
-              >
-                Login
-              </Button>
-              <Button 
-                type="primary" 
-                block 
-                size="large"
-                className="bg-primary"
-                onClick={() => { setAuthModal({ open: true, tab: 'signup' }); setVisible(false); }}
-              >
-                Join Now
-              </Button>
+              <Link href="/auth?mode=login" className="w-full">
+                <Button 
+                  block 
+                  size="large"
+                  onClick={() => setVisible(false)}
+                  className="cursor-pointer"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href="/auth?mode=signup" className="w-full">
+                <Button 
+                  type="primary" 
+                  block 
+                  size="large"
+                  className="bg-primary cursor-pointer"
+                  onClick={() => setVisible(false)}
+                >
+                  Join Now
+                </Button>
+              </Link>
             </div>
           )}
         </div>
       </Drawer>
-
-      <AuthModal 
-        isOpen={authModal.open} 
-        onClose={() => setAuthModal({ ...authModal, open: false })} 
-        initialTab={authModal.tab}
-      />
     </nav>
   );
 };

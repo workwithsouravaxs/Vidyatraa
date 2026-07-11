@@ -123,7 +123,7 @@ export default function DailyPractice() {
       // Completed daily challenge!
       setCompleted(true);
       setIsPlaying(false);
-      
+
       // Update streak and awards
       const streakIncrement = stats.streak + 1;
       const xpBonus = score * 30 + 100; // 100 flat bonus for daily completion
@@ -157,7 +157,7 @@ export default function DailyPractice() {
       <Navbar />
 
       <main className="max-w-4xl mx-auto py-8 px-4 md:px-8 flex-1 flex flex-col justify-center">
-        
+
         {!isPlaying && !completed ? (
           // 1. INTRO START PANEL
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-10 w-full">
@@ -193,21 +193,19 @@ export default function DailyPractice() {
                   <div className="grid grid-cols-2 gap-2.5">
                     <button
                       onClick={() => setQuestType("random")}
-                      className={`p-3 rounded-xl border-2 border-navy font-bold text-xs ${
-                        questType === "random"
-                          ? "bg-sky-100 border-sky-400 text-sky-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]"
-                          : "bg-white text-slate-500"
-                      }`}
+                      className={`p-3 rounded-xl border-2 border-navy font-bold text-xs ${questType === "random"
+                        ? "bg-sky-100 border-sky-400 text-sky-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]"
+                        : "bg-white text-slate-500"
+                        }`}
                     >
                       🎲 Random Syllabus mix
                     </button>
                     <button
                       onClick={() => setQuestType("chapter")}
-                      className={`p-3 rounded-xl border-2 border-navy font-bold text-xs ${
-                        questType === "chapter"
-                          ? "bg-emerald-100 border-emerald-400 text-emerald-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]"
-                          : "bg-white text-slate-500"
-                      }`}
+                      className={`p-3 rounded-xl border-2 border-navy font-bold text-xs ${questType === "chapter"
+                        ? "bg-emerald-100 border-emerald-400 text-emerald-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]"
+                        : "bg-white text-slate-500"
+                        }`}
                     >
                       📂 Chapter Wise focus
                     </button>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
@@ -6,13 +6,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { ArrowLeft, Sparkles, BookOpen, Star, Target, CheckCircle2 } from "lucide-react";
+import { message } from "antd";
+import { supabase } from "@/lib/supabase";
 import BuddyMascot from "@/components/BuddyMascot";
 
 type OnboardingData = {
   name: string;
-  grade: string;
-  board: string;
-  school: string;
+  grade: string; // "School" | "UG" | "PG"
+  board: string; // Course/Board chosen
+  school: string; // School/Institute name
   goal: string;
   expectedPercentage: string;
   xp: number;
@@ -32,10 +34,10 @@ function AuthContent() {
   const [onboardStep, setOnboardStep] = useState(1);
   const [onboardData, setOnboardData] = useState<OnboardingData>({
     name: "",
-    grade: "Class 10",
+    grade: "School",
     board: "CBSE",
     school: "",
-    goal: "Get into Top Science Stream",
+    goal: "Get into Top Science Stream (IIT / Medical)",
     expectedPercentage: "95%+",
     xp: 120, // Starting bonus!
     coins: 50,
@@ -50,6 +52,13 @@ function AuthContent() {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
 
+  // Signup form states (Controlled)
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
   // Mascot dynamic state
   const [buddyState, setBuddyState] = useState<"idle" | "wave" | "thinking" | "happy" | "cheer">("wave");
   const [buddyMsg, setBuddyMsg] = useState("Hey there! Ready to start our learning adventure? Choose an option!");
@@ -58,7 +67,7 @@ function AuthContent() {
     const queryMode = searchParams.get("mode");
     if (queryMode === "signup") {
       setMode("signup");
-      setBuddyMsg("Welcome! Let's sign you up and prepare to crush those Class 10 exams! 🚀");
+      setBuddyMsg("Welcome! Let's sign you up and customize your profile! 🚀");
     } else {
       setMode("login");
       setBuddyMsg("Welcome back, friend! Let's get logged in and resume our streak! 🔥");
@@ -74,106 +83,257 @@ function AuthContent() {
       setBuddyMsg("Hi! Let's start with the basics. What's your name, champ?");
     } else if (onboardStep === 2) {
       setBuddyState("thinking");
-      setBuddyMsg("Awesome! Now, which board exam are you preparing for?");
+      setBuddyMsg("Awesome! Now, which exam board or course are you preparing for?");
     } else if (onboardStep === 3) {
+      const typeText = (onboardData.grade === "UG" || onboardData.grade === "PG") ? "institute" : "school";
       setBuddyState("idle");
-      setBuddyMsg("Nice! Which school do you go to? It helps tailor your school ranking leaderboard.");
+      setBuddyMsg(`Nice! What is your ${typeText}'s name? It helps tailor your local leaderboard.`);
     } else if (onboardStep === 4) {
       setBuddyState("thinking");
-      setBuddyMsg("Aim high! What target percentage are we aiming to score?");
+      setBuddyMsg("Aim high! What target percentage or CGPA are we aiming to score?");
     } else if (onboardStep === 5) {
       setBuddyState("happy");
-      setBuddyMsg("One last thing: What is your primary study goal after 10th grade?");
+      setBuddyMsg("One last thing: What is your primary career or study goal?");
     }
-  }, [onboardStep, mode]);
+  }, [onboardStep, mode, onboardData.grade]);
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setBuddyState("happy");
-    setBuddyMsg("Login successful! Redirecting you to the deck...");
-    
-    // Create a mock student profile
-    const defaultProfile = {
-      name: "Rahul",
-      grade: "Class 10",
-      board: "CBSE",
-      school: "Delhi Public School",
-      goal: "Science Stream with Computer Science",
-      expectedPercentage: "95%+",
-      xp: 1250,
-      coins: 340,
-      level: 4,
-      streak: 5,
-    };
-    localStorage.setItem("vidyatraa_student", JSON.stringify(defaultProfile));
-    
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1200);
+    setLoading(true);
+    setBuddyState("thinking");
+    setBuddyMsg("Verifying credentials...");
+    try {
+      if (authMethod === "email") {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        if (error) throw error;
+
+        // Fetch their profile
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', data.user.id)
+          .maybeSingle();
+
+        // Fetch onboarding signup info if profile not set fully
+        const { data: signupData } = await supabase
+          .from('website_signup')
+          .select('*')
+          .eq('id', data.user.id)
+          .maybeSingle();
+
+        // Save local stats matching dashboard expectations
+        const localProfile = {
+          name: profileData?.full_name || signupData?.name || "Student",
+          grade: profileData?.education_level || signupData?.category || "School",
+          board: profileData?.board || signupData?.board_course || "CBSE",
+          school: profileData?.school_institute || signupData?.school_institute || "School",
+          goal: profileData?.goal || signupData?.goal || "Success",
+          expectedPercentage: profileData?.academic_marks ? `${profileData.academic_marks}%` : signupData?.expected_percentage || "90%+",
+          xp: profileData?.xp || 120,
+          coins: profileData?.coins || 50,
+          level: profileData?.level || 1,
+          streak: profileData?.streak || 1,
+        };
+
+        localStorage.setItem("vidyatraa_student", JSON.stringify(localProfile));
+        setBuddyState("happy");
+        setBuddyMsg("Login successful! Redirecting you to the dashboard...");
+        
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1200);
+      } else {
+        // OTP logic (mock verify for demo, fallback to email warning)
+        setBuddyState("happy");
+        setBuddyMsg("Verifying OTP code...");
+        message.warning("SMS OTP requires phone configuration. Please log in using Email for direct access.");
+      }
+    } catch (err: any) {
+      setBuddyState("thinking");
+      setBuddyMsg("Oops! Verification failed. Check your credentials.");
+      message.error(err.message || "Authentication failed.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSignupSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (signupPassword !== signupConfirmPassword) {
+      message.error("Passwords do not match!");
+      return;
+    }
+    if (signupPassword.length < 6) {
+      message.error("Password must be at least 6 characters long.");
+      return;
+    }
     setBuddyState("happy");
     setMode("onboarding");
   };
 
-  const handleOnboardingNext = () => {
+  const handleOnboardingNext = async () => {
     if (onboardStep < 5) {
       setOnboardStep(onboardStep + 1);
     } else {
       // Completed Onboarding!
-      setBuddyState("cheer");
-      setBuddyMsg("Woohoo! You're all set! Check out your custom dashboard! 🎉");
-      
-      // Save data
-      localStorage.setItem("vidyatraa_student", JSON.stringify(onboardData));
-      
-      // Fire confetti
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#38bdf8", "#fbbf24", "#34d399", "#f97316"]
-      });
+      setLoading(true);
+      setBuddyState("thinking");
+      setBuddyMsg("Creating your secure Vidyatraa account... 🛡️");
 
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 2000);
+      try {
+        // 1. Sign up user in Supabase
+        const { data, error } = await supabase.auth.signUp({
+          email: signupEmail,
+          password: signupPassword,
+          options: {
+            data: {
+              full_name: onboardData.name,
+            }
+          }
+        });
+
+        if (error) throw error;
+        if (!data.user) throw new Error("Failed to create user session.");
+
+        // 2. Save details to website_signup table
+        const { error: signupError } = await supabase
+          .from('website_signup')
+          .insert([{
+            id: data.user.id,
+            email: signupEmail,
+            name: onboardData.name,
+            category: onboardData.grade, // "School", "UG", "PG"
+            board_course: onboardData.board,
+            school_institute: onboardData.school,
+            expected_percentage: onboardData.expectedPercentage,
+            goal: onboardData.goal
+          }]);
+
+        if (signupError) console.error("Database save failed:", signupError);
+
+        // 3. Upsert details to profiles table so they match auth logic
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .upsert({
+            id: data.user.id,
+            email: signupEmail,
+            full_name: onboardData.name,
+            mobile_number: "",
+            state: onboardData.board.includes("State") ? onboardData.board : "All India",
+            category: "General",
+            address: "",
+            annual_income: 0,
+            education_level: onboardData.grade,
+            academic_marks: parseFloat(onboardData.expectedPercentage.replace('%', '')) || 90,
+            parent_occupation: "Other",
+            special_status: "None",
+            current_course: onboardData.board,
+            role: 'student',
+            xp: 120, // Starting bonus
+            coins: 50,
+            level: 1,
+            streak: 1,
+            board: onboardData.board,
+            status: 'Active',
+            updated_at: new Date().toISOString()
+          });
+
+        if (profileError) console.error("Profile save failed:", profileError);
+
+        // 4. Save local representation matching App Expectations
+        const updatedProfile = {
+          name: onboardData.name,
+          grade: onboardData.grade,
+          board: onboardData.board,
+          school: onboardData.school,
+          goal: onboardData.goal,
+          expectedPercentage: onboardData.expectedPercentage,
+          xp: 120,
+          coins: 50,
+          level: 1,
+          streak: 1,
+        };
+        localStorage.setItem("vidyatraa_student", JSON.stringify(updatedProfile));
+
+        setBuddyState("cheer");
+        setBuddyMsg("Woohoo! You're all set! Check out your custom dashboard! 🎉");
+
+        // Fire confetti
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ["#38bdf8", "#fbbf24", "#34d399", "#f97316"]
+        });
+
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 2000);
+
+      } catch (err: any) {
+        setBuddyState("thinking");
+        setBuddyMsg("Account creation failed. Please check details and retry.");
+        message.error(err.message || "Failed to create account.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
-  const handleGoogleLogin = () => {
-    setBuddyState("happy");
-    setBuddyMsg("Google accounts connected! Logging you in...");
-    
-    const googleProfile = {
-      name: "Aryan Sen",
-      grade: "Class 10",
-      board: "ICSE",
-      school: "St. Xavier's Academy",
-      goal: "Commerce with Applied Math",
-      expectedPercentage: "90-95%",
-      xp: 450,
-      coins: 120,
-      level: 2,
-      streak: 3,
-    };
-    localStorage.setItem("vidyatraa_student", JSON.stringify(googleProfile));
-
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1200);
+  const handleGoogleLogin = async () => {
+    setBuddyState("thinking");
+    setBuddyMsg("Connecting to Google...");
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`
+        }
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      message.error(err.message || "Google login failed.");
+    }
   };
 
   const handleSendOtp = () => {
     setOtpSent(true);
     setBuddyState("happy");
-    setBuddyMsg("We sent a magical 4-digit code to your phone! 📱");
+    setBuddyMsg("We sent a mock 4-digit code to your phone! 📱");
   };
 
+  // Determine standard goals based on selected category (grade)
+  const isHigherEd = onboardData.grade === "UG" || onboardData.grade === "PG";
+  const step5Question = isHigherEd 
+    ? "What is your primary career or academic goal?"
+    : "What is your primary goal after Class 10?";
+
+  const step5Options = isHigherEd 
+    ? [
+        "Crack GATE / Higher Studies (M.Tech/MS)",
+        "Prepare for UPSC / Civil Services",
+        "Secure a High-Paying Corporate Job",
+        "Start a Venture / Entrepreneurship",
+        "Pursue Research & Academia (PhD)",
+        "Skill Development & Professional Certifications"
+      ]
+    : [
+        "Get into Top Science Stream (IIT / Medical)",
+        "Pursue Commerce Stream (CA / Management)",
+        "Explore Humanities & Arts Stream",
+        "Diploma / Polytechnic Courses",
+        "Skill Development & AI Careers"
+      ];
+
+  const step4Options = isHigherEd
+    ? ["9.5+ CGPA / 95%+", "9.0-9.5 CGPA / 90-95%", "8.5-9.0 CGPA / 85-90%", "8.0-8.5 CGPA / 80-85%", "7.5-8.0 CGPA / 75-80%", "7.0 CGPA or below / 70% or below"]
+    : ["95%+", "90-95%", "85-90%", "80-85%", "75-80%", "70% or below"];
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-sky-50 to-white py-12 px-4 relative">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-sky-50 to-white py-12 px-4 relative font-sans">
       {/* Back button */}
       <Link
         href="/"
@@ -184,7 +344,7 @@ function AuthContent() {
       </Link>
 
       <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        {/* Left Side: Mascot guidance (Responsive sizing) */}
+        {/* Left Side: Mascot guidance */}
         <div className="md:col-span-5 flex flex-col items-center">
           <BuddyMascot
             state={buddyState}
@@ -194,7 +354,7 @@ function AuthContent() {
           />
         </div>
 
-        {/* Right Side: Forms (Standard & Onboarding) */}
+        {/* Right Side: Forms */}
         <div className="md:col-span-7 w-full max-w-md mx-auto">
           <div className="cartoon-card p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] bg-white relative">
             <AnimatePresence mode="wait">
@@ -222,14 +382,14 @@ function AuthContent() {
                           setAuthMethod("email");
                           setOtpSent(false);
                         }}
-                        className={`py-1.5 rounded-lg ${authMethod === "email" ? "bg-white border border-navy shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]" : "text-slate-500"}`}
+                        className={`py-1.5 rounded-lg cursor-pointer ${authMethod === "email" ? "bg-white border border-navy shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]" : "text-slate-500"}`}
                       >
                         Email
                       </button>
                       <button
                         type="button"
                         onClick={() => setAuthMethod("otp")}
-                        className={`py-1.5 rounded-lg ${authMethod === "otp" ? "bg-white border border-navy shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]" : "text-slate-500"}`}
+                        className={`py-1.5 rounded-lg cursor-pointer ${authMethod === "otp" ? "bg-white border border-navy shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]" : "text-slate-500"}`}
                       >
                         OTP Code
                       </button>
@@ -315,14 +475,14 @@ function AuthContent() {
                           setBuddyState("thinking");
                           setBuddyMsg("No worries! Just enter your email and click the 'Forgot link' we emailed. 😊");
                         }}
-                        className="text-primary hover:underline"
+                        className="text-primary hover:underline cursor-pointer"
                       >
                         Forgot Password?
                       </button>
                     </div>
 
-                    <button type="submit" className="w-full cartoon-btn cartoon-btn-yellow py-3 text-sm">
-                      Log In 🚀
+                    <button type="submit" disabled={loading} className="w-full cartoon-btn cartoon-btn-yellow py-3 text-sm shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
+                      {loading ? "Logging In..." : "Log In 🚀"}
                     </button>
                   </form>
 
@@ -344,7 +504,7 @@ function AuthContent() {
 
                   <p className="text-center font-bold text-xs text-slate-500 mt-6">
                     New to Vidyatraa?{" "}
-                    <button onClick={() => setMode("signup")} className="text-primary hover:underline font-extrabold">
+                    <button onClick={() => setMode("signup")} className="text-primary hover:underline font-extrabold cursor-pointer">
                       Create Account
                     </button>
                   </p>
@@ -373,6 +533,8 @@ function AuthContent() {
                         type="email"
                         required
                         placeholder="rahul@example.com"
+                        value={signupEmail}
+                        onChange={(e) => setSignupEmail(e.target.value)}
                         className="w-full px-3 py-2 border-2 border-navy rounded-xl text-sm font-semibold focus:outline-none"
                       />
                     </div>
@@ -382,6 +544,8 @@ function AuthContent() {
                         type="password"
                         required
                         placeholder="Min 6 characters"
+                        value={signupPassword}
+                        onChange={(e) => setSignupPassword(e.target.value)}
                         className="w-full px-3 py-2 border-2 border-navy rounded-xl text-sm font-semibold focus:outline-none"
                       />
                     </div>
@@ -391,11 +555,13 @@ function AuthContent() {
                         type="password"
                         required
                         placeholder="Confirm password"
+                        value={signupConfirmPassword}
+                        onChange={(e) => setSignupConfirmPassword(e.target.value)}
                         className="w-full px-3 py-2 border-2 border-navy rounded-xl text-sm font-semibold focus:outline-none"
                       />
                     </div>
 
-                    <button type="submit" className="w-full cartoon-btn cartoon-btn-yellow py-3 text-sm">
+                    <button type="submit" className="w-full cartoon-btn cartoon-btn-yellow py-3 text-sm shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
                       Next Step: Customize Profile ➡️
                     </button>
                   </form>
@@ -417,7 +583,7 @@ function AuthContent() {
 
                   <p className="text-center font-bold text-xs text-slate-500 mt-6">
                     Already registered?{" "}
-                    <button onClick={() => setMode("login")} className="text-primary hover:underline font-extrabold">
+                    <button onClick={() => setMode("login")} className="text-primary hover:underline font-extrabold cursor-pointer">
                       Log In
                     </button>
                   </p>
@@ -431,7 +597,7 @@ function AuthContent() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="space-y-6"
+                  className="space-y-6 text-left"
                 >
                   {/* Progress dots */}
                   <div className="flex justify-center gap-2 mb-4">
@@ -466,50 +632,75 @@ function AuthContent() {
                     </motion.div>
                   )}
 
-                  {/* Step 2: Board */}
+                  {/* Step 2: Board / Course (includes School boards, UG, PG) */}
                   {onboardStep === 2 && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <div className="flex items-center gap-2 text-primary mb-2">
                         <BookOpen className="w-5 h-5" />
-                        <span className="font-extrabold text-xs uppercase tracking-wide">Board Exam System</span>
+                        <span className="font-extrabold text-xs uppercase tracking-wide">Course & Board Exam System</span>
                       </div>
                       <h3 className="text-xl font-extrabold font-fredoka text-navy mb-4">
                         Which exam board are you taking?
                       </h3>
-                      <div className="grid grid-cols-1 gap-2.5">
-                        {["CBSE", "ICSE", "Telangana SSC", "Andhra Pradesh SSC", "Other State Boards"].map((board) => (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[280px] overflow-y-auto pr-1">
+                        {[
+                          "CBSE", 
+                          "ICSE", 
+                          "Telangana SSC", 
+                          "Andhra Pradesh SSC", 
+                          "Other State Boards", 
+                          "UG Courses", 
+                          "PG Courses"
+                        ].map((board) => (
                           <button
                             key={board}
                             type="button"
-                            onClick={() => setOnboardData({ ...onboardData, board })}
-                            className={`w-full text-left px-4 py-3 rounded-xl border-3 border-navy font-bold text-sm transition-all flex items-center justify-between ${
+                            onClick={() => {
+                              const categoryText = board === "UG Courses" ? "UG" : board === "PG Courses" ? "PG" : "School";
+                              
+                              // Clear and reset matching default goals
+                              const defaultGoal = categoryText === "School" 
+                                ? "Get into Top Science Stream (IIT / Medical)" 
+                                : "Secure a High-Paying Corporate Job";
+                                
+                              const defaultPct = categoryText === "School" ? "95%+" : "9.5+ CGPA / 95%+";
+
+                              setOnboardData({ 
+                                ...onboardData, 
+                                board, 
+                                grade: categoryText,
+                                goal: defaultGoal,
+                                expectedPercentage: defaultPct
+                              });
+                            }}
+                            className={`w-full text-left px-4 py-3 rounded-xl border-3 border-navy font-bold text-xs md:text-sm transition-all flex items-center justify-between cursor-pointer ${
                               onboardData.board === board
                                 ? "bg-sky-100 border-sky-600 text-sky-900 shadow-[2px_2px_0px_0px_#0284c7]"
                                 : "bg-white hover:bg-slate-50 text-slate-600"
                             }`}
                           >
                             <span>{board}</span>
-                            {onboardData.board === board && <CheckCircle2 className="w-4 h-4 text-sky-600" />}
+                            {onboardData.board === board && <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0" />}
                           </button>
                         ))}
                       </div>
                     </motion.div>
                   )}
 
-                  {/* Step 3: School */}
+                  {/* Step 3: School or Institute Name */}
                   {onboardStep === 3 && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <div className="flex items-center gap-2 text-rose-500 mb-2">
                         <Star className="w-5 h-5" />
-                        <span className="font-extrabold text-xs uppercase tracking-wide">School Affiliation</span>
+                        <span className="font-extrabold text-xs uppercase tracking-wide">Affiliation</span>
                       </div>
                       <h3 className="text-xl font-extrabold font-fredoka text-navy mb-4">
-                        What is your school's name?
+                        What is your School/Institute Name?
                       </h3>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Kendriya Vidyalaya"
+                        placeholder={isHigherEd ? "e.g. Delhi University / IIT" : "e.g. Kendriya Vidyalaya"}
                         value={onboardData.school}
                         onChange={(e) => setOnboardData({ ...onboardData, school: e.target.value })}
                         className="w-full px-4 py-3 border-3 border-navy rounded-xl text-base font-bold focus:outline-none"
@@ -517,7 +708,7 @@ function AuthContent() {
                     </motion.div>
                   )}
 
-                  {/* Step 4: Expected Percentage */}
+                  {/* Step 4: Expected Percentage / CGPA */}
                   {onboardStep === 4 && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <div className="flex items-center gap-2 text-emerald-500 mb-2">
@@ -528,12 +719,12 @@ function AuthContent() {
                         What is your expected percentage?
                       </h3>
                       <div className="grid grid-cols-2 gap-3">
-                        {["95%+", "90-95%", "85-90%", "80-85%", "75-80%", "70% or below"].map((pct) => (
+                        {step4Options.map((pct) => (
                           <button
                             key={pct}
                             type="button"
                             onClick={() => setOnboardData({ ...onboardData, expectedPercentage: pct })}
-                            className={`px-3 py-3.5 rounded-xl border-3 border-navy font-bold text-sm text-center transition-all ${
+                            className={`px-2.5 py-3 rounded-xl border-3 border-navy font-bold text-xs md:text-sm text-center transition-all cursor-pointer ${
                               onboardData.expectedPercentage === pct
                                 ? "bg-emerald-100 border-emerald-600 text-emerald-900 shadow-[2px_2px_0px_0px_#059669]"
                                 : "bg-white hover:bg-slate-50 text-slate-600"
@@ -546,36 +737,30 @@ function AuthContent() {
                     </motion.div>
                   )}
 
-                  {/* Step 5: Study Goal */}
+                  {/* Step 5: Goal (Dynamic questions and options based on category) */}
                   {onboardStep === 5 && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                       <div className="flex items-center gap-2 text-indigo-500 mb-2">
                         <Sparkles className="w-5 h-5" />
                         <span className="font-extrabold text-xs uppercase tracking-wide">Future Path</span>
                       </div>
-                      <h3 className="text-xl font-extrabold font-fredoka text-navy mb-4">
-                        What is your primary goal after Class 10?
+                      <h3 className="text-xl font-extrabold font-fredoka text-navy mb-3">
+                        {step5Question}
                       </h3>
                       <div className="grid grid-cols-1 gap-2.5">
-                        {[
-                          "Get into Top Science Stream (IIT / Medical)",
-                          "Pursue Commerce Stream (CA / Management)",
-                          "Explore Humanities & Arts Stream",
-                          "Diploma / Polytechnic Courses",
-                          "Skill Development & AI Careers",
-                        ].map((goal) => (
+                        {step5Options.map((goal) => (
                           <button
                             key={goal}
                             type="button"
                             onClick={() => setOnboardData({ ...onboardData, goal })}
-                            className={`w-full text-left px-4 py-3.5 rounded-xl border-3 border-navy font-bold text-xs transition-all flex items-center justify-between ${
+                            className={`w-full text-left px-4 py-3.5 rounded-xl border-3 border-navy font-bold text-[11px] md:text-xs transition-all flex items-center justify-between cursor-pointer ${
                               onboardData.goal === goal
                                 ? "bg-indigo-100 border-indigo-600 text-indigo-900 shadow-[2px_2px_0px_0px_#4f46e5]"
                                 : "bg-white hover:bg-slate-50 text-slate-600"
                             }`}
                           >
                             <span>{goal}</span>
-                            {onboardData.goal === goal && <CheckCircle2 className="w-4 h-4 text-indigo-600" />}
+                            {onboardData.goal === goal && <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0" />}
                           </button>
                         ))}
                       </div>
@@ -588,20 +773,20 @@ function AuthContent() {
                       <button
                         type="button"
                         onClick={() => setOnboardStep(onboardStep - 1)}
-                        className="cartoon-btn cartoon-btn-white py-3 text-xs w-1/3"
+                        className="cartoon-btn cartoon-btn-white py-3 text-xs w-1/3 shadow-[1.5px_1.5px_0px_0px_rgba(15,23,42,1)]"
                       >
                         ← Back
                       </button>
                     )}
                     <button
                       type="button"
-                      disabled={onboardStep === 1 && !onboardData.name.trim()}
+                      disabled={loading || (onboardStep === 1 && !onboardData.name.trim()) || (onboardStep === 3 && !onboardData.school.trim())}
                       onClick={handleOnboardingNext}
-                      className={`cartoon-btn cartoon-btn-yellow py-3 text-xs flex-1 ${
-                        onboardStep === 1 && !onboardData.name.trim() ? "opacity-50 cursor-not-allowed" : ""
+                      className={`cartoon-btn cartoon-btn-yellow py-3 text-xs flex-1 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] ${
+                        ((onboardStep === 1 && !onboardData.name.trim()) || (onboardStep === 3 && !onboardData.school.trim())) ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                     >
-                      {onboardStep === 5 ? "Submit & Play! 🎉" : "Continue →"}
+                      {loading ? "Processing..." : onboardStep === 5 ? "Submit & Play! 🎉" : "Continue →"}
                     </button>
                   </div>
                 </motion.div>
@@ -626,4 +811,3 @@ export default function AuthPage() {
     </Suspense>
   );
 }
-
