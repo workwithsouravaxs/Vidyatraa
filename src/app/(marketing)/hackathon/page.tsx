@@ -91,13 +91,9 @@ export default function HackathonLanding() {
   const [visibleSponsorsLimit, setVisibleSponsorsLimit] = useState(20);
   const [visiblePartnersLimit, setVisiblePartnersLimit] = useState(20);
 
-  // Countdown state: Targeted at December 25, 2026 09:00:00 AM IST
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
+  // Countdown states: registrations vs kickoff event
+  const [timeLeftReg, setTimeLeftReg] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeftEvent, setTimeLeftEvent] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // Interactive Judging weights state (custom prioritization simulator)
   const [judgingWeights, setJudgingWeights] = useState({
@@ -131,21 +127,35 @@ export default function HackathonLanding() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Calculate time left to July 24, 2026
-    const targetDate = new Date('2026-07-24T09:00:00+05:30').getTime();
+    // Calculate time left (July 24 vs Dec 25)
+    const regTargetDate = new Date('2026-07-24T09:00:00+05:30').getTime();
+    const eventTargetDate = new Date('2026-12-25T09:00:00+05:30').getTime();
+
     const interval = setInterval(() => {
       const now = new Date().getTime();
-      const difference = targetDate - now;
 
-      if (difference <= 0) {
-        clearInterval(interval);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      // Reg Countdown
+      const diffReg = regTargetDate - now;
+      if (diffReg <= 0) {
+        setTimeLeftReg({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       } else {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        setTimeLeft({ days, hours, minutes, seconds });
+        const days = Math.floor(diffReg / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffReg % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diffReg % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diffReg % (1000 * 60)) / 1000);
+        setTimeLeftReg({ days, hours, minutes, seconds });
+      }
+
+      // Event Countdown
+      const diffEvent = eventTargetDate - now;
+      if (diffEvent <= 0) {
+        setTimeLeftEvent({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      } else {
+        const days = Math.floor(diffEvent / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffEvent % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diffEvent % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diffEvent % (1000 * 60)) / 1000);
+        setTimeLeftEvent({ days, hours, minutes, seconds });
       }
     }, 1000);
 
@@ -528,19 +538,19 @@ export default function HackathonLanding() {
               
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-sky-100/70 border border-sky-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.days}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.days}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Days</p>
                 </div>
                 <div className="bg-amber-100/70 border border-amber-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.hours}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.hours}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Hrs</p>
                 </div>
                 <div className="bg-purple-100/70 border border-purple-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.minutes}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.minutes}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Min</p>
                 </div>
                 <div className="bg-rose-100/70 border border-rose-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.seconds}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.seconds}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Sec</p>
                 </div>
               </div>
@@ -621,6 +631,40 @@ export default function HackathonLanding() {
                     <p className="text-[8px] font-bold text-slate-400 uppercase">Entry</p>
                     <p className="text-xs font-extrabold text-sky-800">Free</p>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Countdown to Hackathon Kickoff Timer */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="cartoon-card p-4 w-full max-w-sm bg-white border-2 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] flex flex-col space-y-3 mt-5"
+            >
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span className="text-[10px] font-extrabold uppercase text-slate-505 flex items-center gap-1.5 font-poppins">
+                  <Clock size={12} className="text-rose-500 animate-spin" style={{ animationDuration: '6s' }} /> Countdown to Hackathon Kickoff
+                </span>
+                <span className="text-[9px] font-extrabold text-amber-600 bg-yellow-50 border border-yellow-200 px-2.5 py-0.5 rounded-full uppercase font-poppins">DEC 25</span>
+              </div>
+              
+              <div className="grid grid-cols-4 gap-2 text-center font-poppins">
+                <div className="bg-sky-55 border border-sky-200 rounded-xl p-2">
+                  <p className="text-xl font-black text-[#0f172a]">{timeLeftEvent.days}</p>
+                  <p className="text-[9px] font-bold text-slate-505 uppercase">Days</p>
+                </div>
+                <div className="bg-amber-55 border border-amber-200 rounded-xl p-2">
+                  <p className="text-xl font-black text-[#0f172a]">{timeLeftEvent.hours}</p>
+                  <p className="text-[9px] font-bold text-slate-555 uppercase">Hrs</p>
+                </div>
+                <div className="bg-purple-55 border border-purple-200 rounded-xl p-2">
+                  <p className="text-xl font-black text-[#0f172a]">{timeLeftEvent.minutes}</p>
+                  <p className="text-[9px] font-bold text-slate-555 uppercase">Min</p>
+                </div>
+                <div className="bg-rose-55 border border-rose-200 rounded-xl p-2">
+                  <p className="text-xl font-black text-[#0f172a]">{timeLeftEvent.seconds}</p>
+                  <p className="text-[9px] font-bold text-slate-555 uppercase">Sec</p>
                 </div>
               </div>
             </motion.div>
