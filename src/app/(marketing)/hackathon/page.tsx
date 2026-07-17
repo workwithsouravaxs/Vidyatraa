@@ -392,7 +392,7 @@ export default function HackathonLanding() {
   if (!mounted) return null;
 
   return (
-    <div className="bg-[#fafafb] text-slate-900 font-sans min-h-screen overflow-x-hidden pt-16">
+    <div className="bg-[#fafafb] text-slate-900 font-poppins min-h-screen overflow-x-hidden pt-16">
       
       {/* Sticky Top Header Nav (Replaces global navbar) */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b-3 border-[#0f172a] shadow-[0_4px_0_0_#0f172a] py-3 px-4">
@@ -409,13 +409,13 @@ export default function HackathonLanding() {
                 className="object-cover"
               />
             </div>
-            <span className="text-sm md:text-lg font-black font-fredoka tracking-wide text-navy whitespace-nowrap">
+            <span className="text-sm md:text-lg font-black font-poppins tracking-wide text-navy whitespace-nowrap">
               Vidya<span className="text-primary">traa</span> Hackathon 1.0
             </span>
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-6 text-[10px] font-extrabold uppercase font-fredoka text-navy tracking-wide">
+          <div className="hidden lg:flex items-center space-x-6 text-[10px] font-extrabold uppercase font-poppins text-navy tracking-wide">
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#statistics" className="hover:text-primary transition-colors">Stats</a>
             <a href="#tracks" className="hover:text-primary transition-colors">Tracks</a>
@@ -448,7 +448,7 @@ export default function HackathonLanding() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute top-full left-0 right-0 bg-white border-b-3 border-[#0f172a] shadow-xl p-4 flex flex-col space-y-3 font-fredoka text-xs font-bold uppercase text-navy border-t border-slate-100 lg:hidden select-none"
+              className="absolute top-full left-0 right-0 bg-white border-b-3 border-[#0f172a] shadow-xl p-4 flex flex-col space-y-3 font-poppins text-xs font-bold uppercase text-navy border-t border-slate-100 lg:hidden select-none"
             >
               <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-1.5 hover:text-primary transition-colors">About</a>
               <a href="#statistics" onClick={() => setMobileMenuOpen(false)} className="py-1.5 hover:text-primary transition-colors">Stats</a>
@@ -528,19 +528,19 @@ export default function HackathonLanding() {
               
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-sky-100/70 border border-sky-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-fredoka text-[#0f172a]">{timeLeft.days}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.days}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Days</p>
                 </div>
                 <div className="bg-amber-100/70 border border-amber-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-fredoka text-[#0f172a]">{timeLeft.hours}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.hours}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Hrs</p>
                 </div>
                 <div className="bg-purple-100/70 border border-purple-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-fredoka text-[#0f172a]">{timeLeft.minutes}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.minutes}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Min</p>
                 </div>
                 <div className="bg-rose-100/70 border border-rose-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-fredoka text-[#0f172a]">{timeLeft.seconds}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeft.seconds}</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Sec</p>
                 </div>
               </div>
@@ -599,7 +599,7 @@ export default function HackathonLanding() {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-amber-300 border-2 border-navy flex items-center justify-center text-navy shadow-[2px_2px_0_0_#0f172a] animate-pulse">
                   <Building className="w-7 h-7" />
                 </div>
-                <h4 className="text-xs font-black font-fredoka text-navy tracking-wide">36 HOURS CAMPUS CODE SPRINT</h4>
+                <h4 className="text-xs font-black font-poppins text-navy tracking-wide">36 HOURS CAMPUS CODE SPRINT</h4>
                 <p className="text-[10px] text-slate-400 leading-normal max-w-[200px]">36 Hours, Git Branches Checkpoint, Video Presentations Room</p>
                 <div className="absolute -right-6 -bottom-6 w-12 h-12 bg-sky-200 border-2 border-navy rounded-full rotate-12 flex items-center justify-center text-xs font-extrabold shadow-[1px_1px_0_0_#0f172a]">
                   CAMPUS
@@ -637,7 +637,7 @@ export default function HackathonLanding() {
               <Zap size={12} className="text-purple-650" />
               <span>THE CONTEST SCHEME</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">
               36 Hours of Intense Physical Hacking
             </h2>
             <p className="text-slate-655 text-base leading-relaxed">
@@ -649,11 +649,11 @@ export default function HackathonLanding() {
 
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="p-4 bg-yellow-50 border-2 border-navy rounded-2xl shadow-[2px_2px_0_0_#0f172a]">
-                <h4 className="font-extrabold text-navy text-sm font-fredoka">Why Participate?</h4>
+                <h4 className="font-extrabold text-navy text-sm font-poppins">Why Participate?</h4>
                 <p className="text-xs text-slate-500 mt-1 leading-normal">Build real portfolio projects, network with peer teams physically, and clear paths to internship opportunities.</p>
               </div>
               <div className="p-4 bg-sky-50 border-2 border-navy rounded-2xl shadow-[2px_2px_0_0_#0f172a]">
-                <h4 className="font-extrabold text-navy text-sm font-fredoka">On-Campus Mentors</h4>
+                <h4 className="font-extrabold text-navy text-sm font-poppins">On-Campus Mentors</h4>
                 <p className="text-xs text-slate-500 mt-1 leading-normal">Get instant face-to-face feedback and consulting checkpoints from industry coordinators on the floor.</p>
               </div>
             </div>
@@ -665,7 +665,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-sky-100 border-3 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] flex flex-col justify-between h-44">
               <Clock className="w-8 h-8 text-sky-850" />
               <div>
-                <h4 className="text-lg font-black font-fredoka text-navy">36 Hours Sprint</h4>
+                <h4 className="text-lg font-black font-poppins text-navy">36 Hours Sprint</h4>
                 <p className="text-xs text-slate-550 mt-1">A high-energy physical coding weekend from campus kickoff to final code locks.</p>
               </div>
             </div>
@@ -673,7 +673,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-amber-100 border-3 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] flex flex-col justify-between h-44">
               <Users className="w-8 h-8 text-amber-850" />
               <div>
-                <h4 className="text-lg font-black font-fredoka text-navy">Team: 2-4 Hackers</h4>
+                <h4 className="text-lg font-black font-poppins text-navy">Team: 2-4 Hackers</h4>
                 <p className="text-xs text-slate-550 mt-1">Register as a team or join the matchmaking session on our Discord and on Day 1 morning.</p>
               </div>
             </div>
@@ -681,7 +681,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-emerald-100 border-3 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] flex flex-col justify-between h-44">
               <Building className="w-8 h-8 text-emerald-855" />
               <div>
-                <h4 className="text-lg font-black font-fredoka text-navy">Hyderabad Campus</h4>
+                <h4 className="text-lg font-black font-poppins text-navy">Hyderabad Campus</h4>
                 <p className="text-xs text-slate-550 mt-1">Held physically at our core campus facility. Hot meals and sleeping rooms provided.</p>
               </div>
             </div>
@@ -689,7 +689,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-purple-100 border-3 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] flex flex-col justify-between h-44">
               <Award className="w-8 h-8 text-purple-855" />
               <div>
-                <h4 className="text-lg font-black font-fredoka text-navy">National Level</h4>
+                <h4 className="text-lg font-black font-poppins text-navy">National Level</h4>
                 <p className="text-xs text-slate-550 mt-1">Showcase your software prototypes alongside physical participants from all across India.</p>
               </div>
             </div>
@@ -703,7 +703,7 @@ export default function HackathonLanding() {
         <div className="max-w-7xl mx-auto text-center space-y-12">
           <div className="space-y-3">
             <span className="text-xs font-black text-amber-400 uppercase tracking-widest">LIVE TRACKER</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka leading-none">Registration Scale</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins leading-none">Registration Scale</h2>
             <p className="text-slate-400 max-w-xl mx-auto text-sm">Real-time status targets for hackers, colleges, and open panel slots.</p>
           </div>
 
@@ -717,7 +717,7 @@ export default function HackathonLanding() {
                   {stat.icon}
                 </div>
                 <div>
-                  <p className="text-2xl font-black font-fredoka text-white tracking-tight">
+                  <p className="text-2xl font-black font-poppins text-white tracking-tight">
                     {counterValues[index] ? counterValues[index].toLocaleString() : 0}{stat.suffix}
                   </p>
                   <p className="text-[10px] font-bold text-slate-400 mt-0.5 uppercase tracking-wide">{stat.label}</p>
@@ -732,7 +732,7 @@ export default function HackathonLanding() {
       <section id="tracks" className="py-20 px-4 max-w-7xl mx-auto border-b-2 border-slate-100">
         <div className="text-center space-y-4 mb-12">
           <span className="text-xs font-black text-sky-600 uppercase tracking-wider bg-sky-50 border border-sky-200 px-3 py-1 rounded-full">DOMAINS</span>
-          <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Hackathon Tracks</h2>
+          <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Hackathon Tracks</h2>
           <p className="text-slate-550 max-w-xl mx-auto text-sm">Select any of the 50 domains to construct your digital prototypes. Visible tracks paginate by 20 on desktop and 10 on mobile.</p>
           
           {/* Search and Filters */}
@@ -809,7 +809,7 @@ export default function HackathonLanding() {
           <div className="text-center mt-8">
             <button 
               onClick={() => setVisibleTracksLimit(prev => prev + (isMobile ? 10 : 20))}
-              className="cartoon-btn cartoon-btn-white py-3 px-8 text-xs cursor-pointer shadow-[3px_3px_0_0_#0f172a] font-fredoka flex items-center gap-2 mx-auto"
+              className="cartoon-btn cartoon-btn-white py-3 px-8 text-xs cursor-pointer shadow-[3px_3px_0_0_#0f172a] font-poppins flex items-center gap-2 mx-auto"
             >
               <span>Show More Domains</span>
               <ChevronDown className="w-4 h-4" />
@@ -824,7 +824,7 @@ export default function HackathonLanding() {
           
           <div className="text-center space-y-4">
             <span className="text-xs font-black text-purple-600 uppercase tracking-wider bg-purple-50 border border-purple-200 px-3 py-1 rounded-full">ROADMAP</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Event Timeline</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Event Timeline</h2>
             <p className="text-slate-500 max-w-xl mx-auto text-sm">Optimize your schedule. A clean, highly visible boxy grid showing all stages from registration launch to cash prize distributions.</p>
           </div>
 
@@ -843,7 +843,7 @@ export default function HackathonLanding() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-xs md:text-sm text-navy uppercase tracking-wide leading-snug">{step.title}</h4>
-                  <p className="text-[10px] text-slate-455 mt-1.5 leading-relaxed font-medium font-sans">{step.desc}</p>
+                  <p className="text-[10px] text-slate-455 mt-1.5 leading-relaxed font-medium font-poppins">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -856,7 +856,7 @@ export default function HackathonLanding() {
       <section id="prizes" className="py-20 px-4 max-w-7xl mx-auto border-b-2 border-slate-100">
         <div className="text-center space-y-4 mb-12">
           <span className="text-xs font-black text-rose-600 uppercase tracking-wider bg-rose-50 border border-rose-200 px-3 py-1 rounded-full">PRIZE DISTRIBUTION</span>
-          <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Cash Prize Pool</h2>
+          <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Cash Prize Pool</h2>
           <p className="text-slate-500 max-w-xl mx-auto text-sm">A total cash pool disbursed directly to winning developers. Build functional software to apply.</p>
         </div>
 
@@ -872,7 +872,7 @@ export default function HackathonLanding() {
                 <div className="bg-white/80 p-2 rounded-xl border border-navy/20">{prize.icon}</div>
               </div>
               <div className="mt-6 space-y-1.5">
-                <h3 className="text-3xl font-black font-fredoka tracking-tight text-navy">{prize.amount}</h3>
+                <h3 className="text-3xl font-black font-poppins tracking-tight text-navy">{prize.amount}</h3>
                 <p className="text-xs font-bold text-navy/70 leading-snug">{prize.label}</p>
               </div>
             </div>
@@ -891,7 +891,7 @@ export default function HackathonLanding() {
                 <div className="bg-white/50 p-1.5 rounded-lg">{prize.icon}</div>
               </div>
               <div className="mt-4">
-                <h4 className="text-xl font-black font-fredoka text-navy">{prize.amount}</h4>
+                <h4 className="text-xl font-black font-poppins text-navy">{prize.amount}</h4>
                 <p className="text-[10px] text-slate-500 font-medium leading-normal mt-0.5">{prize.label}</p>
               </div>
             </div>
@@ -900,7 +900,7 @@ export default function HackathonLanding() {
 
         {/* Extra Perks Banner */}
         <div className="mt-8 bg-sky-50 border-2 border-dashed border-sky-300 rounded-2xl p-6 text-center space-y-4">
-          <h4 className="text-xs font-black font-fredoka text-sky-850 uppercase tracking-widest">ADDITIONAL PROGRAM BENEFITS</h4>
+          <h4 className="text-xs font-black font-poppins text-sky-850 uppercase tracking-widest">ADDITIONAL PROGRAM BENEFITS</h4>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
             <div className="p-4 bg-white border border-sky-200 rounded-xl flex items-start gap-3">
               <div className="text-sky-655 mt-0.5"><Gift size={20} /></div>
@@ -933,7 +933,7 @@ export default function HackathonLanding() {
           
           <div className="text-center space-y-4">
             <span className="text-xs font-black text-amber-600 uppercase tracking-wider bg-amber-50 border border-amber-200 px-3 py-1 rounded-full">DAY PLANNER</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Hacking Schedule</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Hacking Schedule</h2>
             <p className="text-slate-500 max-w-xl mx-auto text-sm">Track live checkpoint timings and on-campus schedule. Select the day tab to toggle.</p>
 
             {/* Toggle tabs */}
@@ -983,7 +983,7 @@ export default function HackathonLanding() {
           
           <div className="text-center space-y-4">
             <span className="text-xs font-black text-navy uppercase tracking-wider bg-yellow-100 border border-yellow-350 px-3 py-1 rounded-full">COMPLIANCE</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Rules & Guidelines</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Rules & Guidelines</h2>
             <p className="text-slate-550 max-w-xl mx-auto text-sm">
               We stand for clean hacking, respect, and original creations. Make sure you read these guidelines structured in a boxy grid overview.
             </p>
@@ -1000,11 +1000,11 @@ export default function HackathonLanding() {
                   className="cartoon-card p-5 bg-white border-3 border-[#0f172a] shadow-[4px_4px_0_0_#0f172a] hover:shadow-[6px_6px_0_0_#0f172a] transition-all flex flex-col justify-between min-h-[220px]"
                 >
                   <div>
-                    <h4 className="font-black text-xs md:text-sm uppercase tracking-wide text-navy border-b-2 border-slate-100 pb-2.5 mb-3.5 font-fredoka flex items-center gap-2">
+                    <h4 className="font-black text-xs md:text-sm uppercase tracking-wide text-navy border-b-2 border-slate-100 pb-2.5 mb-3.5 font-poppins flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-primary border border-navy" /> 
                       <span>{cleanTitle} Rules</span>
                     </h4>
-                    <ul className="space-y-3 font-sans">
+                    <ul className="space-y-3 font-poppins">
                       {rulesList.map((rule, idx) => (
                         <li key={idx} className="flex gap-2.5 items-start text-[11px] text-slate-655 leading-relaxed font-medium">
                           <span className="text-primary font-black mt-0.5 text-xs">•</span>
@@ -1027,14 +1027,14 @@ export default function HackathonLanding() {
           
           <div className="lg:col-span-6 space-y-6">
             <span className="text-xs font-black text-emerald-600 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">SCORE BOARD</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Judging Weight Simulator</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Judging Weight Simulator</h2>
             <p className="text-slate-550 text-sm leading-relaxed">
               Wondering how projects are evaluated? Use our weight adjuster simulation to prioritize different parameters. Official ratios are listed on the right.
             </p>
 
             {/* Simulator Inputs */}
             <div className="space-y-3 bg-white border-2 border-navy rounded-[1.5rem] p-5 shadow-[4px_4px_0_0_#0f172a]">
-              <h4 className="text-xs font-black font-fredoka text-navy uppercase tracking-wider border-b pb-2 mb-3">Adjust Score Weighting:</h4>
+              <h4 className="text-xs font-black font-poppins text-navy uppercase tracking-wider border-b pb-2 mb-3">Adjust Score Weighting:</h4>
               {Object.keys(judgingWeights).map((key) => {
                 const val = judgingWeights[key as keyof typeof judgingWeights];
                 return (
@@ -1070,7 +1070,7 @@ export default function HackathonLanding() {
 
           <div className="lg:col-span-6 space-y-4">
             <div className="cartoon-card p-6 bg-white border-3 border-[#0f172a] shadow-[6px_6px_0_0_#0f172a] space-y-4">
-              <h3 className="text-lg font-black font-fredoka text-navy border-b-2 border-slate-100 pb-2 flex items-center gap-2">
+              <h3 className="text-lg font-black font-poppins text-navy border-b-2 border-slate-100 pb-2 flex items-center gap-2">
                 <Scale className="text-indigo-500" /> Official Evaluation Weighting
               </h3>
               
@@ -1149,7 +1149,7 @@ export default function HackathonLanding() {
           <div className="space-y-8">
             <div className="text-center space-y-3">
               <span className="text-xs font-black text-purple-600 uppercase tracking-wider bg-purple-50 border border-purple-200 px-3 py-1 rounded-full">PANELS REGISTER</span>
-              <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Keynote Speakers</h2>
+              <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Keynote Speakers</h2>
               <p className="text-slate-500 max-w-xl mx-auto text-sm">Open presentation slots for registered technical influencers. Paginated by 20 on desktop and 10 on mobile.</p>
             </div>
 
@@ -1162,7 +1162,7 @@ export default function HackathonLanding() {
               <div className="text-center mt-6">
                 <button 
                   onClick={() => setVisibleSpeakersLimit(prev => prev + (isMobile ? 10 : 20))}
-                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-fredoka flex items-center gap-1.5 mx-auto"
+                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-poppins flex items-center gap-1.5 mx-auto"
                 >
                   <span>Show More Speakers</span>
                   <ChevronDown className="w-3.5 h-3.5" />
@@ -1177,7 +1177,7 @@ export default function HackathonLanding() {
           <div className="space-y-8">
             <div className="text-center space-y-3">
               <span className="text-xs font-black text-rose-600 uppercase tracking-wider bg-rose-50 border border-rose-200 px-3 py-1 rounded-full">EVALUATORS REGISTER</span>
-              <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Judges & Coding Mentors</h2>
+              <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Judges & Coding Mentors</h2>
               <p className="text-slate-500 max-w-xl mx-auto text-sm">Open evaluation slots. Staff engineers and developers can lock in spots. Paginated by 20 on desktop and 10 on mobile.</p>
             </div>
 
@@ -1190,7 +1190,7 @@ export default function HackathonLanding() {
               <div className="text-center mt-6">
                 <button 
                   onClick={() => setVisibleMentorsLimit(prev => prev + (isMobile ? 10 : 20))}
-                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-fredoka flex items-center gap-1.5 mx-auto"
+                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-poppins flex items-center gap-1.5 mx-auto"
                 >
                   <span>Show More Evaluators</span>
                   <ChevronDown className="w-3.5 h-3.5" />
@@ -1210,7 +1210,7 @@ export default function HackathonLanding() {
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <span className="text-xs font-black text-emerald-600 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">SPONSORSHIPS REGISTER</span>
-              <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Corporate Sponsors</h2>
+              <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Corporate Sponsors</h2>
               <p className="text-slate-500 max-w-xl mx-auto text-sm">Open sponsorship slots. Partner tiers are available for organizations to provide APIs credits. Paginated by 20 on desktop and 10 on mobile.</p>
             </div>
 
@@ -1223,7 +1223,7 @@ export default function HackathonLanding() {
               <div className="text-center mt-6">
                 <button 
                   onClick={() => setVisibleSponsorsLimit(prev => prev + (isMobile ? 10 : 20))}
-                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-fredoka flex items-center gap-1.5 mx-auto"
+                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-poppins flex items-center gap-1.5 mx-auto"
                 >
                   <span>Show More Sponsors</span>
                   <ChevronDown className="w-3.5 h-3.5" />
@@ -1238,7 +1238,7 @@ export default function HackathonLanding() {
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <span className="text-xs font-black text-sky-655 uppercase tracking-wider bg-sky-50 border border-sky-200 px-3 py-1 rounded-full">COMMUNITY ASSOCIATIONS</span>
-              <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Community Partners</h2>
+              <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Community Partners</h2>
               <p className="text-slate-500 max-w-xl mx-auto text-sm">Open partnership slots. Join as local student clubs or coding chapters. Paginated by 20 on desktop and 10 on mobile.</p>
             </div>
 
@@ -1251,7 +1251,7 @@ export default function HackathonLanding() {
               <div className="text-center mt-6">
                 <button 
                   onClick={() => setVisiblePartnersLimit(prev => prev + (isMobile ? 10 : 20))}
-                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-fredoka flex items-center gap-1.5 mx-auto"
+                  className="cartoon-btn cartoon-btn-white py-2 px-6 text-xs cursor-pointer shadow-[2px_2px_0_0_#0f172a] font-poppins flex items-center gap-1.5 mx-auto"
                 >
                   <span>Show More Partners</span>
                   <ChevronDown className="w-3.5 h-3.5" />
@@ -1267,7 +1267,7 @@ export default function HackathonLanding() {
       <section id="faq" className="py-20 px-4 max-w-4xl mx-auto border-b-2 border-slate-100">
         <div className="text-center space-y-4 mb-12">
           <span className="text-xs font-black text-amber-600 uppercase tracking-wider bg-amber-50 border border-amber-200 px-3 py-1 rounded-full">QUESTIONS</span>
-          <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Frequently Asked Questions</h2>
           <p className="text-slate-500 text-sm">Have doubts about virtual evaluation setups, timelines, or code ownership? Answers below.</p>
         </div>
 
@@ -1313,7 +1313,7 @@ export default function HackathonLanding() {
           
           <div className="text-center space-y-4">
             <span className="text-xs font-black text-sky-600 uppercase tracking-wider bg-sky-50 border border-sky-200 px-3 py-1 rounded-full">JOIN THE CONTEST</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Registration Steps</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Registration Steps</h2>
             <p className="text-slate-550 max-w-xl mx-auto text-sm">Secure your team slot remote online. Follow the roadmap path below.</p>
           </div>
 
@@ -1322,7 +1322,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-white border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-slate-400">STEP 1</span>
               <div className="text-sky-600"><Laptop size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Create Account</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Create Account</h4>
               <p className="text-[9px] text-slate-405 leading-snug mt-1">Sign up on the Vidyatraa Portal using Google/Email.</p>
             </div>
 
@@ -1330,7 +1330,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-white border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-slate-400">STEP 2</span>
               <div className="text-sky-600"><Mail size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Verify Email</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Verify Email</h4>
               <p className="text-[9px] text-slate-405 leading-snug mt-1">Check verification inbox link to unlock access.</p>
             </div>
 
@@ -1338,7 +1338,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-white border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-slate-400">STEP 3</span>
               <div className="text-sky-600"><Users size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Create Team</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Create Team</h4>
               <p className="text-[9px] text-slate-405 leading-snug mt-1">Create a new clan name and get your team joining code.</p>
             </div>
 
@@ -1346,7 +1346,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-white border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-slate-400">STEP 4</span>
               <div className="text-sky-600"><UserCheck size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Join Team</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Join Team</h4>
               <p className="text-[9px] text-slate-405 leading-snug mt-1">Invite friends or join an active team code block.</p>
             </div>
 
@@ -1354,7 +1354,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-white border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-slate-400">STEP 5</span>
               <div className="text-sky-600"><Sliders size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Submit Details</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Submit Details</h4>
               <p className="text-[9px] text-slate-405 leading-snug mt-1">Input university student cards, roll ids, and streams.</p>
             </div>
 
@@ -1362,7 +1362,7 @@ export default function HackathonLanding() {
             <div className="cartoon-card p-5 bg-emerald-50 border-2 border-navy shadow-[3px_3px_0_0_#0f172a] text-center flex flex-col justify-between items-center h-44 relative">
               <span className="text-xs font-black text-emerald-600">STEP 6</span>
               <div className="text-emerald-655"><CheckCircle size={28} /></div>
-              <h4 className="font-extrabold text-navy text-xs font-fredoka">Confirmation</h4>
+              <h4 className="font-extrabold text-navy text-xs font-poppins">Confirmation</h4>
               <p className="text-[9px] text-emerald-800 leading-snug mt-1">Hacker pass generated! Lock in and start preparing drafts.</p>
             </div>
           </div>
@@ -1388,12 +1388,12 @@ export default function HackathonLanding() {
           
           <div className="lg:col-span-5 space-y-6">
             <span className="text-xs font-black text-[#0f172a] uppercase tracking-wider bg-yellow-100 border border-yellow-350 px-3 py-1 rounded-full">GET IN TOUCH</span>
-            <h2 className="text-3xl md:text-5xl font-black font-fredoka text-navy leading-none">Support & Contacts</h2>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Support & Contacts</h2>
             <p className="text-slate-500 text-sm leading-relaxed">
               Got specific inquiries or registration questions? Contact our coordination team and we will reply within 4 hours.
             </p>
 
-            <div className="space-y-4 font-sans">
+            <div className="space-y-4 font-poppins">
               <a href="mailto:hackathon@vidyatraa.com" className="flex items-center gap-3.5 text-xs font-extrabold text-navy hover:text-primary transition-colors">
                 <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center border border-slate-200 text-slate-500">
                   <Mail size={16} />
@@ -1452,8 +1452,8 @@ export default function HackathonLanding() {
                   VENUE ANNOUNCEMENT PENDING
                 </span>
                 
-                <h4 className="text-base font-black font-fredoka text-navy">Hyderabad Campus Arena</h4>
-                <p className="text-[10px] text-slate-450 leading-relaxed max-w-sm font-sans">
+                <h4 className="text-base font-black font-poppins text-navy">Hyderabad Campus Arena</h4>
+                <p className="text-[10px] text-slate-450 leading-relaxed max-w-sm font-poppins">
                   The exact campus location details, parking directions, and gate registration guidelines will be announced and emailed to all registered teams on **December 22, 2026** along with the shortlisted selections. Stay tuned!
                 </p>
                 <button 
@@ -1485,7 +1485,7 @@ export default function HackathonLanding() {
               className="cartoon-card bg-white border-3 border-[#0f172a] shadow-[8px_8px_0_0_#0f172a] max-w-2xl w-full p-5 space-y-4"
             >
               <div className="flex justify-between items-center border-b pb-2">
-                <h4 className="font-extrabold text-navy text-sm font-fredoka">🎥 Vidyatraa Hackathon 1.0 - Teaser Stream</h4>
+                <h4 className="font-extrabold text-navy text-sm font-poppins">🎥 Vidyatraa Hackathon 1.0 - Teaser Stream</h4>
                 <button 
                   onClick={() => setShowPromoModal(false)}
                   className="w-6 h-6 border border-slate-205 rounded flex items-center justify-center text-slate-400 hover:text-navy cursor-pointer"
@@ -1502,7 +1502,7 @@ export default function HackathonLanding() {
                 <div className="relative z-10 w-16 h-16 rounded-full bg-yellow-400 border-2 border-navy flex items-center justify-center text-navy shadow-[3px_3px_0_0_#0f172a] group-hover:scale-105 transition-transform cursor-pointer">
                   <Play className="w-6 h-6 fill-navy text-navy pl-1" />
                 </div>
-                <h5 className="relative z-10 text-xs font-black font-fredoka text-yellow-300 uppercase tracking-widest mt-4">STREAMING TRAILER NOW</h5>
+                <h5 className="relative z-10 text-xs font-black font-poppins text-yellow-300 uppercase tracking-widest mt-4">STREAMING TRAILER NOW</h5>
                 <p className="relative z-10 text-[10px] text-slate-400 mt-1 max-w-[280px]">Hear from former winning hacker groups, judges, and mentor guidelines in 3 minutes.</p>
               </div>
 
@@ -1522,3 +1522,4 @@ export default function HackathonLanding() {
     </div>
   );
 }
+
