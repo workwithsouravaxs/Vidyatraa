@@ -1,7 +1,8 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Trophy, Compass, Award, User, LogOut, Menu, X, Flame } from "lucide-react";
@@ -89,8 +90,14 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 select-none group">
-          <div className="bg-primary border-3 border-navy rounded-2xl p-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] group-hover:scale-105 transition-transform">
-            <span className="text-xl md:text-2xl font-bold text-white">🎓</span>
+          <div className="relative w-9 h-9 border-2 border-navy rounded-xl overflow-hidden shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] group-hover:scale-105 transition-transform shrink-0 bg-white">
+            <Image 
+              src="/footer_logo.jpeg" 
+              alt="Vidyatraa Logo" 
+              fill
+              sizes="36px"
+              className="object-cover"
+            />
           </div>
           <span className="text-2xl font-bold font-fredoka tracking-wide text-navy">
             Vidya<span className="text-primary">traa</span>
