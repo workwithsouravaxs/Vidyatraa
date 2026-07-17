@@ -131,8 +131,8 @@ export default function HackathonLanding() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Calculate time left to Dec 25, 2026
-    const targetDate = new Date('2026-12-25T09:00:00+05:30').getTime();
+    // Calculate time left to July 24, 2026
+    const targetDate = new Date('2026-07-24T09:00:00+05:30').getTime();
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const difference = targetDate - now;
@@ -291,7 +291,7 @@ export default function HackathonLanding() {
   ];
 
   const timelineSteps = [
-    { title: 'Registration Opens', date: 'November 1, 2026', desc: 'Secure your team slot free online.', status: 'upcoming' },
+    { title: 'Registration Opens', date: 'July 24, 2026', desc: 'Secure your team slot free online.', status: 'upcoming' },
     { title: 'Registration Closes', date: 'December 15, 2026', desc: 'All hacker entries lock.', status: 'upcoming' },
     { title: 'Idea PPT Submission', date: 'December 18, 2026', desc: 'Upload 3-slide project draft online.', status: 'upcoming' },
     { title: 'Shortlisting Announced', date: 'December 22, 2026', desc: 'Top 100 teams clear to code.', status: 'upcoming' },
@@ -489,7 +489,7 @@ export default function HackathonLanding() {
               className="inline-flex items-center gap-2 bg-yellow-100 border-2 border-[#0f172a] px-4 py-1.5 rounded-full text-xs font-extrabold text-[#0f172a] shadow-[2px_2px_0px_0px_#0f172a]"
             >
               <Calendar size={13} className="text-amber-600 animate-pulse" />
-              <span>DECEMBER 25-26, 2026 • HYDERABAD VENUE (DETAILS TO BE ANNOUNCED)</span>
+              <span>REGISTRATIONS START: JULY 24, 2026 • EVENT DATE: DEC 25-26, 2026 • HYDERABAD CAMPUS (VENUE DETAILS TBA)</span>
             </motion.div>
 
             {/* Event Name & Hero Tagline */}
@@ -521,9 +521,9 @@ export default function HackathonLanding() {
             >
               <div className="flex items-center justify-between border-b-2 border-slate-100 pb-2">
                 <span className="text-xs font-extrabold uppercase text-slate-500 flex items-center gap-1.5">
-                  <Clock size={14} className="text-rose-500 animate-spin" style={{ animationDuration: '6s' }} /> Countdown to Campus Kickoff
+                  <Clock size={14} className="text-rose-500 animate-spin" style={{ animationDuration: '6s' }} /> Countdown to Registration Launch
                 </span>
-                <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">REGISTRATION OPEN</span>
+                <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">COMING SOON</span>
               </div>
               
               <div className="grid grid-cols-4 gap-2 text-center">
