@@ -33,6 +33,7 @@ import {
 export default function RedesignedHome() {
   const [mounted, setMounted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [showHackathonPopup, setShowHackathonPopup] = useState(false);
 
   const features = [
     {
@@ -87,6 +88,10 @@ export default function RedesignedHome() {
 
   useEffect(() => {
     setMounted(true);
+    const timer = setTimeout(() => {
+      setShowHackathonPopup(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const platformCapabilities = [
@@ -769,6 +774,98 @@ export default function RedesignedHome() {
           </div>
         </div>
       </section>
+
+      {/* Hackathon Announcement Popup */}
+      <AnimatePresence>
+        {showHackathonPopup && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-[#0f172a]/70 backdrop-blur-sm flex items-center justify-center p-4 font-sans"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              className="relative w-full max-w-md bg-white border-3 border-[#0f172a] shadow-[8px_8px_0_0_#0f172a] rounded-[2rem] p-6 text-center space-y-5 overflow-hidden"
+            >
+              {/* Pattern lines */}
+              <div className="absolute inset-0 bg-[radial-gradient(#0f172a03_1.5px,transparent_1.5px)] bg-[size:1rem_1rem] pointer-events-none" />
+
+              {/* Close Button */}
+              <button 
+                onClick={() => setShowHackathonPopup(false)}
+                className="absolute top-4 right-4 w-7 h-7 border-2 border-[#0f172a] rounded-lg bg-white flex items-center justify-center hover:bg-slate-50 transition-colors shadow-[1px_1px_0_0_#0f172a] cursor-pointer focus:outline-none"
+                aria-label="Close Announcement Dialog"
+              >
+                <span className="font-extrabold text-xs">×</span>
+              </button>
+
+              {/* Glowing Trophy Badge */}
+              <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 border-2 border-[#0f172a] flex items-center justify-center text-[#0f172a] shadow-[3px_3px_0_0_#0f172a] mx-auto animate-bounce mt-2 shrink-0">
+                <Trophy size={26} />
+              </div>
+
+              {/* Heading */}
+              <div className="space-y-1.5">
+                <span className="text-[9px] font-black text-amber-600 bg-yellow-50 border border-yellow-250 px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
+                  REGISTRATION OPEN
+                </span>
+                <h3 className="text-xl font-black font-fredoka text-navy pt-2">
+                  Vidyatraa Hackathon 1.0
+                </h3>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                  National Level Physical Coding Arena
+                </p>
+              </div>
+
+              {/* Specs Grid */}
+              <div className="grid grid-cols-2 gap-3 text-left">
+                <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl">
+                  <p className="text-[8px] font-bold text-slate-400 uppercase">Prize Pool</p>
+                  <p className="text-sm font-extrabold text-sky-850">₹3,00,000</p>
+                </div>
+                <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl">
+                  <p className="text-[8px] font-bold text-slate-400 uppercase">Tracks</p>
+                  <p className="text-sm font-extrabold text-purple-850">50 Domains</p>
+                </div>
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl">
+                  <p className="text-[8px] font-bold text-slate-400 uppercase">Date</p>
+                  <p className="text-xs font-extrabold text-amber-850">Dec 25-26, 2026</p>
+                </div>
+                <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl">
+                  <p className="text-[8px] font-bold text-slate-400 uppercase">Venue</p>
+                  <p className="text-[10px] font-extrabold text-rose-850 font-sans">Hyderabad Campus</p>
+                </div>
+              </div>
+
+              {/* Notice text */}
+              <p className="text-[9px] text-slate-400 font-bold leading-normal bg-slate-50 border border-dashed border-slate-200 p-2.5 rounded-xl font-sans">
+                ⚠️ Conduction mode is offline. Exact campus location details will be announced on December 22, 2026.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-2 pt-2">
+                <Link href="/hackathon" onClick={() => setShowHackathonPopup(false)}>
+                  <button className="w-full cartoon-btn cartoon-btn-yellow py-3 text-xs shadow-[3px_3px_0_0_#0f172a] font-fredoka flex items-center justify-center gap-2 cursor-pointer">
+                    <span>Explore Hackathon Page</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </Link>
+                <button 
+                  onClick={() => setShowHackathonPopup(false)}
+                  className="w-full text-slate-400 hover:text-navy text-[10px] font-extrabold uppercase py-1.5 transition-colors cursor-pointer"
+                >
+                  Maybe Later
+                </button>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -4,13 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Button, Drawer, Space, Dropdown, MenuProps } from 'antd';
-import { Menu as MenuIcon, User as UserIcon, X, Search, Bookmark, Bell, LogOut, LayoutDashboard, Shield } from 'lucide-react';
+import { Menu as MenuIcon, User as UserIcon, X, Search, Bookmark, Bell, LogOut, LayoutDashboard, Shield, Sparkles } from 'lucide-react';
 import AuthModal from './AuthModal';
 import { supabase } from '@/lib/supabase';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const pathname = usePathname();
+  if (pathname === '/hackathon' || pathname?.startsWith('/hackathon/')) return null;
+
   const { user, profile, signOut } = useAuth();
   const [visible, setVisible] = useState(false);
   const [authModal, setAuthModal] = useState<{ open: boolean; tab: 'login' | 'signup' }>({ open: false, tab: 'login' });
@@ -24,6 +28,7 @@ const Navbar = () => {
     { label: 'Internships', href: '/internships', icon: null },
     { label: 'Eligibility Checker', href: '/eligibility', icon: <Bell size={18} /> },
     { label: 'Find Scholarships', href: '/search', icon: <Search size={18} /> },
+    { label: 'Hackathon 1.0', href: '/hackathon', icon: <Sparkles size={18} /> },
     { label: 'Contact Us', href: '/contact', icon: null },
   ];
 
