@@ -79,7 +79,7 @@ export default function HackathonLanding() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [activeScheduleDay, setActiveScheduleDay] = useState<'day1' | 'day2'>('day1');
+  const [activeScheduleDay, setActiveScheduleDay] = useState<'day1' | 'overnight' | 'day2'>('day1');
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -301,7 +301,7 @@ export default function HackathonLanding() {
   ];
 
   const timelineSteps = [
-    { title: 'Registration Opens', date: 'July 24, 2026', desc: 'Secure your team slot free online.', status: 'upcoming' },
+    { title: 'Registration Opens', date: 'To be announced', desc: 'Secure your team slot free online.', status: 'upcoming' },
     { title: 'Registration Closes', date: 'December 15, 2026', desc: 'All hacker entries lock.', status: 'upcoming' },
     { title: 'Idea PPT Submission', date: 'December 18, 2026', desc: 'Upload 3-slide project draft online.', status: 'upcoming' },
     { title: 'Shortlisting Announced', date: 'December 22, 2026', desc: 'Top 100 teams clear to code.', status: 'upcoming' },
@@ -312,21 +312,47 @@ export default function HackathonLanding() {
   ];
 
   const scheduleDay1 = [
-    { time: '08:00 AM', event: 'Physical Registration & Check-in', desc: 'Collect your offline entry pass, event stickers, custom notebooks, and developer shirts at Hyderabad Campus (Details to be announced).' },
-    { time: '09:00 AM', event: 'Opening Ceremony', desc: 'Inaugural keynotes, safety layouts check, and guidelines briefing.' },
-    { time: '09:30 AM', event: 'Coding Sprint Starts!', desc: 'Hacking begins. 36-hour clock starts ticking. Wi-Fi credentials allocated.' },
-    { time: '02:00 PM', event: 'Tech Architecture Review', desc: 'Coordinators check initial repository structures and API setup.' },
-    { time: '08:30 PM', event: 'Dinner & Networking', desc: 'Enjoy hot food panels and networking ice-breakers with other coding clans.' },
-    { time: '11:00 PM', event: 'Midnight Gaming Challenge', desc: 'Optional fun mini-games to unwind and win quick gear.' }
+    { time: '7:30 – 9:00 AM', event: 'Registration & Kit Distribution', desc: 'Collect your offline entry pass, event stickers, custom notebooks, and developer shirts.', notes: 'ID badges, team tags, WiFi credentials, sponsor swag bags' },
+    { time: '9:00 – 9:45 AM', event: 'Opening Ceremony', desc: 'Inaugural keynotes, safety layouts check, and guidelines briefing.', notes: 'Anthem, welcome address, chief guest speech' },
+    { time: '9:45 – 10:30 AM', event: 'Sponsor Keynotes', desc: 'Live introduction of sponsors and their specific domain tracks (3–4 sponsors, 10 min each).', notes: 'Each sponsor introduces their problem statement/track live' },
+    { time: '10:30 – 11:00 AM', event: 'Rules, Judging Criteria & Domain Briefing', desc: 'Overview of evaluation checkpoints, scoring schema, and submission formats.', notes: 'Explain checkpoints, scoring rubric, submission format' },
+    { time: '11:00 AM', event: 'Hacking Begins (Official Start)', desc: 'The 36-hour physical timer begins running on the main screens.', notes: 'Timer displayed on main screen/stream' },
+    { time: '11:00 AM – 1:00 PM', event: 'Ideation + Team Setup', desc: 'Brainstorming and initial repository setup on GitHub.', notes: 'Mentors circulate; sponsors visit their own domain tables' },
+    { time: '1:00 – 2:00 PM', event: 'Lunch (Slot A/B to avoid rush)', desc: 'Fuel up and connect with other participants at the food panels.', notes: 'Sponsor booths open during lunch for informal networking' },
+    { time: '2:00 – 4:00 PM', event: 'Deep Work Block', desc: 'Uninterrupted core development time in the dedicated coding zones.', notes: '“Do Not Disturb” hacking zone' },
+    { time: '4:00 – 4:30 PM', event: 'Checkpoint 1 — Idea Validation', desc: 'Coordinators perform first architecture and idea validation reviews.', notes: 'Mentors + sponsor reps give 5-min feedback per team' },
+    { time: '4:30 – 6:00 PM', event: 'Hacking Continues', desc: 'Refining code structure and setting up backend APIs.', notes: '' },
+    { time: '6:00 – 6:30 PM', event: 'Energizer Break', desc: 'Flash Mob / Music / Games to reset energy levels on the floor.', notes: 'Short, loud, fun — resets energy' },
+    { time: '6:30 – 8:00 PM', event: 'Hacking + Mentor Round 2', desc: 'Optional 1:1 troubleshooting and consulting slots with experts.', notes: 'Optional 1:1 slots' },
+    { time: '8:00 – 9:00 PM', event: 'Dinner', desc: 'Enjoy hot food panels and discussions with team clans.', notes: '' },
+    { time: '9:00 – 10:30 PM', event: 'Tech Talk / Sponsor Workshop', desc: 'Optional technical masterclasses and workshops hosted by sponsors.', notes: 'Counts toward “engagement points” for spectators too' },
+    { time: '10:30 PM – 12:00 AM', event: 'Hacking + Midnight Snacks Rollout', desc: 'Snack panels open with coffee, energy drinks, and quick bites.', notes: 'Coffee/Red Bull station opens' },
+    { time: '12:00 AM', event: 'Checkpoint 2 — Progress Demo', desc: 'Informal progress demo (2 min/team) to keep teams on track.', notes: 'Keeps teams honest on progress, no elimination' }
+  ];
+
+  const scheduleOvernight = [
+    { time: '12:00 – 3:00 AM', event: 'Deep Hacking (low-noise zone)', desc: 'Focused building block with minimal distractions, dim lighting, and quiet music.', notes: 'Dim lighting, quiet music, dedicated helpdesk open' },
+    { time: '3:00 – 3:30 AM', event: 'Midnight Gaming Break', desc: 'Optional recreational gaming corner for a quick team reset.', notes: 'FIFA/Valorant/board games corner for teams needing a reset' },
+    { time: '3:30 – 6:00 AM', event: 'Hacking Continues', desc: 'Midnight development blocks; volunteer support team remains active.', notes: 'Volunteers do rounds with snacks/water' },
+    { time: '6:00 – 7:00 AM', event: 'Sunrise Break / Fresh-up Slots', desc: 'Freshen up and take a short walk or stretch break.', notes: 'Washrooms, short walk, stretch break announced' },
+    { time: '7:00 – 8:00 AM', event: 'Breakfast', desc: 'Hot breakfast to charge up team batteries for the final stretch.', notes: '' },
+    { time: '8:00 – 9:00 AM', event: 'Hacking Resumes + Checkpoint 3', desc: 'Mandatory tech sync and feature freeze warning.', notes: '“6 hours to final submission” countdown begins' }
   ];
 
   const scheduleDay2 = [
-    { time: '08:00 AM', event: 'Breakfast & Fuel', desc: 'Hot breakfast to charge up the team batteries.' },
-    { time: '09:00 AM', event: 'Checkpoint Review 2', desc: 'Mandatory tech sync. Show progress draft to coordinators.' },
-    { time: '08:30 PM', event: 'Prototype Submissions Close', desc: 'Strict lock on GitHub repositories branches.' },
-    { time: '09:00 PM', event: 'Live Pitching Presentations', desc: 'Present functional drafts in assigned evaluation rooms to judges panel.' },
-    { time: '11:00 PM', event: 'Judging Decision', desc: 'Evaluators calculate total score ratios.' },
-    { time: '11:30 PM', event: 'Closing & Awards Ceremony', desc: 'Announcing winners and cash prize check distributions.' }
+    { time: '9:00 – 11:00 AM', event: 'Final Development Sprint', desc: 'Focusing on bug-squashing and stability. No new features.', notes: 'Mentors help only with bugs, not new features' },
+    { time: '11:00 – 11:30 AM', event: 'Pitch Deck / Demo Video Prep Briefing', desc: 'Briefing on the final submission requirements and video demo formatting.', notes: 'Format, time limit, submission link shared' },
+    { time: '11:30 AM – 1:00 PM', event: 'Final Touches + Submission Window Opens', desc: 'Uploading code and preparing final submissions with a live counter.', notes: 'Live “teams submitted” counter on screen for audience' },
+    { time: '1:00 – 1:45 PM', event: 'Lunch', desc: 'A quick break before evaluations and judging rounds start.', notes: '' },
+    { time: '1:45 PM', event: 'Hard Submission Deadline', desc: 'All submissions must be locked in. Portal locks completely.', notes: 'Portal locks — no late entries' },
+    { time: '2:00 – 4:30 PM', event: 'Preliminary Judging Round (parallel tracks)', desc: 'Sponsors evaluate specific domain tracks in assigned rooms.', notes: 'Sponsors judge their own domains; faculty/industry judge open tracks' },
+    { time: '2:00 – 4:30 PM', event: '(Parallel) Audience Engagement Zone', desc: 'Booths, gaming, and sponsor demo zones open for spectators.', notes: 'Gaming, AR/VR booths, sponsor demo booths, meme contest, photo booth' },
+    { time: '4:30 – 5:00 PM', event: 'Shortlist Announcement', desc: 'Top teams per domain announced live on stream and big screens.', notes: 'Builds suspense — announce on stream + big screen' },
+    { time: '5:00 – 6:30 PM', event: 'Grand Finale — Top Teams Pitch on Main Stage', desc: 'Finalist teams pitch live (5 min pitch + 3 min Q&A) to all judges and audience.', notes: 'Live audience + livestream; 5 min pitch + 3 min Q&A per team' },
+    { time: '6:30 – 7:00 PM', event: 'Judges’ Deliberation', desc: 'Determining final rank positions; filled with live DJ set and lucky draws.', notes: 'Fill with a live performance / DJ set / sponsor lucky draw' },
+    { time: '7:00 – 8:00 PM', event: 'Valedictory & Sponsor Recognition', desc: 'Acknowledging sponsors and organizers with thank-you videos.', notes: 'Certificates, sponsor thank-you videos, feedback collection' },
+    { time: '8:00 – 8:45 PM', event: 'Prize Distribution & Closing Ceremony', desc: 'Crowning the domain winners and overall champions of Hackathon 1.0.', notes: 'Winners per domain + overall champion' },
+    { time: '8:45 – 9:00 PM', event: 'Group Photo, Vote of Thanks, Wrap-up', desc: 'Concluding the 36-hour physical hackathon. Official close.', notes: 'Official close of 36-hour event' }
   ];
 
   const rulesData = {
@@ -502,7 +528,7 @@ export default function HackathonLanding() {
               className="inline-flex items-center gap-2 bg-yellow-100 border-2 border-[#0f172a] px-4 py-1.5 rounded-full text-xs font-extrabold text-[#0f172a] shadow-[2px_2px_0px_0px_#0f172a]"
             >
               <Calendar size={13} className="text-amber-600 animate-pulse" />
-              <span>REGISTRATIONS START: JULY 24, 2026 • EVENT DATE: DEC 25-26, 2026 • HYDERABAD CAMPUS (VENUE DETAILS TBA)</span>
+              <span>REGISTRATIONS START: TO BE ANNOUNCED • EVENT DATE: DEC 25-26, 2026 • HYDERABAD CAMPUS (VENUE DETAILS TBA)</span>
             </motion.div>
 
             {/* Event Name & Hero Tagline */}
@@ -541,19 +567,19 @@ export default function HackathonLanding() {
               
               <div className="grid grid-cols-4 gap-2 text-center">
                 <div className="bg-sky-100/70 border border-sky-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.days}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">X</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Days</p>
                 </div>
                 <div className="bg-amber-100/70 border border-amber-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.hours}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">X</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Hrs</p>
                 </div>
                 <div className="bg-purple-100/70 border border-purple-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.minutes}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">X</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Min</p>
                 </div>
                 <div className="bg-rose-100/70 border border-rose-300 rounded-xl p-2.5">
-                  <p className="text-3xl font-black font-poppins text-[#0f172a]">{timeLeftReg.seconds}</p>
+                  <p className="text-3xl font-black font-poppins text-[#0f172a]">X</p>
                   <p className="text-[10px] font-bold text-slate-500 uppercase">Sec</p>
                 </div>
               </div>
@@ -687,12 +713,28 @@ export default function HackathonLanding() {
             <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">
               36 Hours of Intense Physical Hacking
             </h2>
-            <p className="text-slate-655 text-base leading-relaxed">
-              **Vidyatraa Hackathon 1.0** is an offline-only challenge designed to help student developers across India test their prototyping capabilities. Choose from 50 tracks to write code, design user interfaces, and construct databases physically at our Hyderabad Campus.
+            <p className="text-slate-500 text-sm leading-relaxed">
+              <strong>Vidyatraa Hackathon 1.0</strong> is an offline-only challenge designed to help student developers across India test their prototyping capabilities. Choose from <strong>50 tracks</strong> to write code, design user interfaces, and construct databases physically at our Hyderabad Campus.
             </p>
-            <p className="text-slate-655 text-base leading-relaxed">
-              Join us at our Hyderabad venue. We provide high-speed campus Wi-Fi, constant food and beverages supply, dedicated resting zones, and physical checkpoints with coordinators.
-            </p>
+            
+            {/* Core Loop & Framework Badges */}
+            <div className="bg-slate-100 border-2 border-navy rounded-2xl p-4 space-y-3 shadow-[2px_2px_0_0_#0f172a] font-poppins">
+              <h4 className="text-xs font-black text-navy uppercase tracking-wider">Overall Event Framework:</h4>
+              <ul className="space-y-2 text-xs">
+                <li className="flex items-start gap-2 text-slate-700">
+                  <span className="text-primary font-bold mt-0.5">•</span>
+                  <span><strong>Duration:</strong> 36 hours of continuous hacking (Dec 25, 9:00 AM &rarr; Dec 26, 9:00 PM)</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-700">
+                  <span className="text-primary font-bold mt-0.5">•</span>
+                  <span><strong>Domains:</strong> ~50 problem statements across tracks (sponsor-owned + open innovation)</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-700">
+                  <span className="text-primary font-bold mt-0.5">•</span>
+                  <span><strong>Core loop:</strong> Hack &rarr; Checkpoint &rarr; Mentor &rarr; Engage &rarr; Hack &rarr; Demo &rarr; Judge</span>
+                </li>
+              </ul>
+            </div>
 
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="p-4 bg-yellow-50 border-2 border-navy rounded-2xl shadow-[2px_2px_0_0_#0f172a]">
@@ -994,6 +1036,14 @@ export default function HackathonLanding() {
                 Day 1 (Dec 25)
               </button>
               <button 
+                onClick={() => setActiveScheduleDay('overnight')}
+                className={`px-6 py-2 text-xs font-extrabold uppercase rounded-lg cursor-pointer transition-all ${
+                  activeScheduleDay === 'overnight' ? 'bg-[#0f172a] text-white' : 'text-slate-655 hover:bg-slate-50'
+                }`}
+              >
+                Overnight (Dec 25-26)
+              </button>
+              <button 
                 onClick={() => setActiveScheduleDay('day2')}
                 className={`px-6 py-2 text-xs font-extrabold uppercase rounded-lg cursor-pointer transition-all ${
                   activeScheduleDay === 'day2' ? 'bg-[#0f172a] text-white' : 'text-slate-655 hover:bg-slate-50'
@@ -1003,22 +1053,226 @@ export default function HackathonLanding() {
               </button>
             </div>
           </div>
-
+ 
           {/* Schedule timeline block */}
           <div className="max-w-3xl mx-auto bg-white border-3 border-[#0f172a] rounded-[2rem] p-6 md:p-8 shadow-[6px_6px_0_0_#0f172a]">
             <div className="space-y-6">
-              {(activeScheduleDay === 'day1' ? scheduleDay1 : scheduleDay2).map((item, idx) => (
+              {(activeScheduleDay === 'day1' ? scheduleDay1 : activeScheduleDay === 'overnight' ? scheduleOvernight : scheduleDay2).map((item, idx) => (
                 <div key={idx} className="flex gap-4 items-start border-b border-dashed border-slate-100 last:border-b-0 pb-5 last:pb-0">
-                  <span className="bg-sky-50 border border-sky-300 text-sky-850 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0 w-20 text-center">
+                  <span className="bg-sky-50 border border-sky-300 text-sky-850 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0 w-28 text-center">
                     {item.time}
                   </span>
                   <div>
                     <h4 className="font-extrabold text-sm text-navy">{item.event}</h4>
                     <p className="text-xs text-slate-455 leading-relaxed mt-1">{item.desc}</p>
+                    {item.notes && (
+                      <div className="mt-2 text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md inline-block">
+                        Note: {item.notes}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 🚀 8. Audience & Stakeholder Experience */}
+      <section id="experience" className="py-20 px-4 max-w-7xl mx-auto border-b-2 border-slate-100">
+        <div className="space-y-12">
+          
+          <div className="text-center space-y-4">
+            <span className="text-xs font-black text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full">ENGAGEMENT HUB</span>
+            <h2 className="text-3xl md:text-5xl font-black font-poppins text-navy leading-none">Stakeholder Experience</h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm">
+              We design our event experience for everyone. Here is how we keep participants, spectators, and sponsors actively engaged.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Card 1: Students / Participants */}
+            <div className="cartoon-card p-6 bg-gradient-to-b from-sky-50 to-white border-3 border-[#0f172a] shadow-[6px_6px_0_0_#0f172a] hover:shadow-[8px_8px_0_0_#0f172a] hover:-translate-y-1 transition-all flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-sky-100 border border-sky-300 text-sky-855 flex items-center justify-center shrink-0">
+                    <GraduationCap className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-sm uppercase tracking-wide text-navy">For Participants</h3>
+                    <p className="text-[10px] font-bold text-slate-400">Engaging Students</p>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 text-left font-poppins">
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      Momentum Tools
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Visible countdown timers, live leaderboard/progress tracker on the main screen, and checkpoint-based mini-feedback to prevent feeling stuck.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      Mentorship Rhythm
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Rotating mentors every 4–6 hours to ensure high-quality advice; teams request help via a simple QR-code helpdesk system.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      Non-Hacking Recharge Points
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Scheduled gaming corners, music breaks, and flash mobs so teams can plan their recharge intervals around deep work.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      Recognition Beyond Winning
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Special alternative awards like &ldquo;Most Innovative Idea,&rdquo; &ldquo;Best Pivot,&rdquo; and &ldquo;Best Rookie Team&rdquo; to keep all teams invested.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      Comfort Logistics
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Clearly marked rest zones, phone-charging stations, and a quiet zone for the 12 AM – 6 AM stretch to prevent burnout.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Card 2: Spectators / Audience */}
+            <div className="cartoon-card p-6 bg-gradient-to-b from-purple-50 to-white border-3 border-[#0f172a] shadow-[6px_6px_0_0_#0f172a] hover:shadow-[8px_8px_0_0_#0f172a] hover:-translate-y-1 transition-all flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 border border-purple-300 text-purple-850 flex items-center justify-center shrink-0">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-sm uppercase tracking-wide text-navy">For Spectators</h3>
+                    <p className="text-[10px] font-bold text-slate-400">Engaging the Audience</p>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 text-left font-poppins">
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      Something to Watch Always
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Constant livestreaming with commentary during pitch/demo rounds and a &ldquo;spectator leaderboard&rdquo; showing trending domains.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      Participatory Elements
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      People&rsquo;s Choice Award via QR-code voting at demo booths, plus meme contests and photo booths tied to event hashtags.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      Content for Social Media
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Short reels shot during checkpoints, mentor rounds, and the midnight energizer to generate real-time visual proof of a lively event.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      Open Demo Zones
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      During judging windows, a public demo/booth area runs continuously so the waiting audience has projects to explore.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Card 3: Sponsors */}
+            <div className="cartoon-card p-6 bg-gradient-to-b from-amber-50 to-white border-3 border-[#0f172a] shadow-[6px_6px_0_0_#0f172a] hover:shadow-[8px_8px_0_0_#0f172a] hover:-translate-y-1 transition-all flex flex-col justify-between min-h-[480px]">
+              <div>
+                <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-amber-100 border border-amber-300 text-amber-850 flex items-center justify-center shrink-0">
+                    <Building className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-sm uppercase tracking-wide text-navy">For Sponsors</h3>
+                    <p className="text-[10px] font-bold text-slate-400">Engaging Brand Partners</p>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 text-left font-poppins">
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Ownership of a Track
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Sponsors don&rsquo;t just fund prizes — they own problem statements, judge submissions, and get dedicated Q&amp;A slots with hacking teams.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Stage Time Visibility
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Get a dedicated 10-minute keynote slot on the main stage and a closing thank-you video highlight for visibility beyond a basic logo.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Talent Access
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Direct access to the resume/portfolio wall and a dedicated 30-minute &ldquo;sponsor networking hour&rdquo; during lunch to scout talent.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Live Brand Presence
+                    </h4>
+                    <p className="text-[11px] text-slate-550 leading-relaxed pl-3.5">
+                      Dedicated physical booths during audience engagement slots (Day 2, 2:00–4:30 PM) for live product demos, giveaways, and mini-challenges.
+                    </p>
+                  </li>
+                  <li className="space-y-1">
+                    <h4 className="text-xs font-extrabold text-navy flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Data / ROI Takeaway
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed pl-3.5">
+                      Detailed post-event reports detailing track team metrics, social impressions, and footfall metrics collected at their booth.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
           </div>
 
         </div>

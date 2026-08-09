@@ -27,8 +27,28 @@ import {
   Briefcase,
   Flame,
   Trophy,
-  Landmark
+  Landmark,
+  Heart,
+  MessageSquare
 } from 'lucide-react';
+
+const InstagramIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 export default function RedesignedHome() {
   const [mounted, setMounted] = useState(false);
@@ -651,6 +671,113 @@ export default function RedesignedHome() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 🚀 7.5 Instagram Feed Integration */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/50 border-b border-slate-100">
+        <div className="max-w-6xl mx-auto space-y-10">
+          
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200/80 pb-6">
+            <div className="space-y-3 text-left">
+              <span className="inline-flex items-center gap-1.5 bg-rose-50 border border-rose-100 px-3.5 py-1 rounded-full text-rose-600 font-bold text-xs">
+                <InstagramIcon size={14} className="text-rose-500" />
+                <span>On Socials</span>
+              </span>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-poppins">
+                Follow our journey
+              </h2>
+              <p className="text-slate-500 font-bold text-xs md:text-sm">
+                Get daily study hacks, exam strategies, and product updates on Instagram.
+              </p>
+            </div>
+            
+            <a 
+              href="https://www.instagram.com/vidyatraa.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:opacity-95 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-pink-500/20 transition-all hover:-translate-y-0.5"
+            >
+              <InstagramIcon size={16} />
+              <span>@vidyatraa.app</span>
+            </a>
+          </div>
+
+          {/* Posts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Post 1 */}
+            <a 
+              href="https://www.instagram.com/vidyatraa.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative aspect-square rounded-[2rem] overflow-hidden border border-slate-200 shadow-md bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-6 flex flex-col justify-between text-white"
+            >
+              <div className="flex justify-between items-start">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">STUDY HACKS</span>
+                <span className="text-xl">📚</span>
+              </div>
+              <div className="space-y-2 text-left font-poppins">
+                <h3 className="text-lg font-black leading-tight">5 Productivity Hacks for Board Exams ⚡</h3>
+                <p className="text-[10px] text-white/80 font-bold">Swipe to learn how to organize study blocks and maximize focus intervals.</p>
+              </div>
+              
+              {/* Instagram Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 text-sm font-black">
+                <span className="flex items-center gap-1.5"><Heart size={18} className="fill-white" /> 1,240</span>
+                <span className="flex items-center gap-1.5"><MessageSquare size={18} className="fill-white" /> 48</span>
+              </div>
+            </a>
+
+            {/* Post 2 */}
+            <a 
+              href="https://www.instagram.com/vidyatraa.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative aspect-square rounded-[2rem] overflow-hidden border border-slate-200 shadow-md bg-gradient-to-br from-sky-400 via-indigo-600 to-purple-800 p-6 flex flex-col justify-between text-white"
+            >
+              <div className="flex justify-between items-start">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">APP FEATURE</span>
+                <span className="text-xl">🤖</span>
+              </div>
+              <div className="space-y-2 text-left font-poppins">
+                <h3 className="text-lg font-black leading-tight">Meet your new AI Study Assistant! ✨</h3>
+                <p className="text-[10px] text-white/80 font-bold">Ask any doubts, get customized tests, and rise up career lanes.</p>
+              </div>
+              
+              {/* Instagram Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 text-sm font-black">
+                <span className="flex items-center gap-1.5"><Heart size={18} className="fill-white" /> 980</span>
+                <span className="flex items-center gap-1.5"><MessageSquare size={18} className="fill-white" /> 35</span>
+              </div>
+            </a>
+
+            {/* Post 3 */}
+            <a 
+              href="https://www.instagram.com/vidyatraa.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative aspect-square rounded-[2rem] overflow-hidden border border-slate-200 shadow-md bg-gradient-to-br from-amber-400 via-orange-500 to-rose-600 p-6 flex flex-col justify-between text-white"
+            >
+              <div className="flex justify-between items-start">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">COMMUNITY</span>
+                <span className="text-xl">🏆</span>
+              </div>
+              <div className="space-y-2 text-left font-poppins">
+                <h3 className="text-lg font-black leading-tight">Vidyatraa Scholars Program 🎓</h3>
+                <p className="text-[10px] text-white/80 font-bold">Applications are open for nationwide student aid. Find matches today.</p>
+              </div>
+              
+              {/* Instagram Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 text-sm font-black">
+                <span className="flex items-center gap-1.5"><Heart size={18} className="fill-white" /> 1,540</span>
+                <span className="flex items-center gap-1.5"><MessageSquare size={18} className="fill-white" /> 62</span>
+              </div>
+            </a>
+
+          </div>
+
         </div>
       </section>
 

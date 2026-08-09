@@ -70,7 +70,7 @@ export default function RevisionPlanner() {
     setIsGenerated(true);
     setBuddyState("cheer");
     setBuddyMsg(`Ka-boom! Plan generated! You have 🔥 ${diffDays} Days left. Let's tackle today's schedule one block at a time! 🚀`);
-    
+
     confetti({
       particleCount: 50,
       spread: 60,
@@ -84,14 +84,14 @@ export default function RevisionPlanner() {
         if (newStatus === "Completed" && t.status !== "Completed") {
           setBuddyState("happy");
           setBuddyMsg("Bravo! Task complete! Gained +20 XP points. Keep this streak alive! 🔥");
-          
+
           confetti({
             particleCount: 20,
             angle: 120,
             spread: 45,
             origin: { x: 1 }
           });
-          
+
           // Add small XP to profile
           const stored = localStorage.getItem("vidyatraa_student");
           if (stored) {
@@ -123,10 +123,10 @@ export default function RevisionPlanner() {
       <Navbar />
 
       <main className="max-w-7xl mx-auto py-8 px-4 md:px-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Left Side Panel: Configurations or mascot */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-          
+
           {/* Setup revision planner */}
           <div className="cartoon-card p-6 bg-white shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
             <h3 className="text-xl font-extrabold font-fredoka text-navy mb-4 flex items-center gap-1.5">
@@ -179,7 +179,7 @@ export default function RevisionPlanner() {
         {/* Right Side Panel: Interactive schedules display */}
         <div className="lg:col-span-8 flex flex-col gap-6">
           <div className="cartoon-card p-6 md:p-8 bg-white shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] min-h-[420px] flex flex-col">
-            
+
             {isGenerated ? (
               // Planner Dashboards
               <div className="flex-1 flex flex-col">
@@ -206,9 +206,8 @@ export default function RevisionPlanner() {
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`py-3.5 capitalize border-r border-slate-200 transition-all ${
-                        activeTab === tab ? "bg-amber-100 text-amber-900 border-b-2 border-b-amber-500 font-black" : "hover:bg-slate-50"
-                      }`}
+                      className={`py-3.5 capitalize border-r border-slate-200 transition-all ${activeTab === tab ? "bg-amber-100 text-amber-900 border-b-2 border-b-amber-500 font-black" : "hover:bg-slate-50"
+                        }`}
                     >
                       {tab === "daily" ? "📝 Daily Checklist" : tab === "weekly" ? "📅 Weekly Routine" : "🏆 Milestones"}
                     </button>
@@ -218,7 +217,7 @@ export default function RevisionPlanner() {
                 {/* Tab content */}
                 <div className="flex-1 text-left">
                   <AnimatePresence mode="wait">
-                    
+
                     {/* 1. Daily Checklist */}
                     {activeTab === "daily" && (
                       <motion.div
@@ -237,13 +236,12 @@ export default function RevisionPlanner() {
                           {dailyTasks.map((task) => (
                             <div
                               key={task.id}
-                              className={`cartoon-card-flat p-4 border-2 border-navy flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all ${
-                                task.status === "Completed"
-                                  ? "bg-slate-100/70 border-slate-300 opacity-60 text-slate-400"
-                                  : task.status === "Skipped"
+                              className={`cartoon-card-flat p-4 border-2 border-navy flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all ${task.status === "Completed"
+                                ? "bg-slate-100/70 border-slate-300 opacity-60 text-slate-400"
+                                : task.status === "Skipped"
                                   ? "bg-rose-50 border-rose-200"
                                   : "bg-white"
-                              }`}
+                                }`}
                             >
                               <div className="space-y-1">
                                 <div className="flex items-center gap-2 text-xs font-black">
@@ -263,21 +261,19 @@ export default function RevisionPlanner() {
                               <div className="flex gap-2">
                                 <button
                                   onClick={() => handleStatusChange(task.id, "Completed")}
-                                  className={`px-3 py-1.5 rounded-lg border-2 border-navy font-bold text-xs ${
-                                    task.status === "Completed"
-                                      ? "bg-emerald-500 border-emerald-600 text-white shadow-sm"
-                                      : "bg-white text-emerald-600 hover:bg-emerald-50"
-                                  }`}
+                                  className={`px-3 py-1.5 rounded-lg border-2 border-navy font-bold text-xs ${task.status === "Completed"
+                                    ? "bg-emerald-500 border-emerald-600 text-white shadow-sm"
+                                    : "bg-white text-emerald-600 hover:bg-emerald-50"
+                                    }`}
                                 >
                                   {task.status === "Completed" ? "Completed" : "Mark Done"}
                                 </button>
                                 <button
                                   onClick={() => handleStatusChange(task.id, "Skipped")}
-                                  className={`px-3 py-1.5 rounded-lg border-2 border-navy font-bold text-xs ${
-                                    task.status === "Skipped"
-                                      ? "bg-rose-500 border-rose-600 text-white shadow-sm"
-                                      : "bg-white text-rose-500 hover:bg-rose-50"
-                                  }`}
+                                  className={`px-3 py-1.5 rounded-lg border-2 border-navy font-bold text-xs ${task.status === "Skipped"
+                                    ? "bg-rose-500 border-rose-600 text-white shadow-sm"
+                                    : "bg-white text-rose-500 hover:bg-rose-50"
+                                    }`}
                                 >
                                   {task.status === "Skipped" ? "Skipped" : "Skip"}
                                 </button>
