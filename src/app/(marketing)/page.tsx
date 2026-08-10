@@ -60,6 +60,8 @@ export default function RedesignedHome() {
   const [mounted, setMounted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showHackathonPopup, setShowHackathonPopup] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const heroImages = ["/hero_vidyatraa.png", "/hero_1_vidyatraa.png"];
 
   const features = [
     {
@@ -118,6 +120,10 @@ export default function RedesignedHome() {
       setShowHackathonPopup(true);
     }, 1000);
 
+    const slideTimer = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % 2);
+    }, 4500);
+
     // Dynamically load/process Instagram embeds
     if (typeof window !== "undefined") {
       if ((window as any).instgrm) {
@@ -135,7 +141,10 @@ export default function RedesignedHome() {
       }
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(slideTimer);
+    };
   }, []);
 
   const platformCapabilities = [
@@ -273,69 +282,37 @@ export default function RedesignedHome() {
             </motion.div>
           </div>
 
-          {/* Interactive Modern UI Mockup (Authentic and Organic) */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+          {/* 2-Hero Image Slideshow with Auto-Slide Effect */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative w-full">
             <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-300/15 blur-[80px] rounded-full pointer-events-none" />
             <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-indigo-300/15 blur-[80px] rounded-full pointer-events-none" />
             
-            <div className="relative w-full max-w-md bg-white/70 backdrop-blur-md border border-slate-200 rounded-[2rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-6">
-              {/* Header of mockup */}
-              <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 bg-red-400/80 rounded-full" />
-                  <span className="w-2.5 h-2.5 bg-yellow-400/80 rounded-full" />
-                  <span className="w-2.5 h-2.5 bg-green-400/80 rounded-full" />
-                </div>
-                <span className="text-[10px] font-bold text-slate-400 tracking-wide uppercase">Vidyatraa Ecosystem Hub</span>
-              </div>
-              
-              {/* Feature Box 1: Mock Test Projections */}
-              <div className="p-4 bg-gradient-to-br from-blue-50/80 to-indigo-50/50 border border-blue-100/50 rounded-2xl space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-[9px] font-extrabold text-blue-600 bg-blue-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">BOARD PREPARATION</span>
-                  <span className="text-[10px] text-slate-400 font-bold">Class 10 Prep</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h5 className="text-[11px] font-bold text-slate-500 font-poppins">Board Preparedness</h5>
-                    <p className="text-2xl font-black text-slate-900 mt-0.5">93.8%</p>
-                  </div>
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-indigo-100 shadow-sm text-base">
-                    📈
-                  </div>
-                </div>
-                <div className="w-full bg-slate-200/50 h-2 rounded-full overflow-hidden">
-                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full" style={{ width: '93.8%' }} />
-                </div>
-              </div>
-              
-              {/* Feature Box 2: Course Progress & Mode Toggle */}
-              <div className="p-4 bg-indigo-50/40 border border-indigo-100/50 rounded-2xl flex items-center justify-between">
-                <div className="space-y-1">
-                  <span className="text-[9px] font-extrabold text-indigo-600 bg-indigo-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">ACTIVE COURSE</span>
-                  <h4 className="text-xs font-extrabold text-slate-800 mt-1 font-poppins">Science & Technology</h4>
-                  <p className="text-[10px] text-slate-400 font-medium">Chapter 4: Carbon & Its Compounds</p>
-                </div>
-                {/* Light/Dark Mode Mock Toggle Switch */}
-                <div className="flex flex-col items-center gap-1.5 shrink-0">
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Theme Mode</span>
-                  <div className="w-10 h-5 bg-slate-200 rounded-full p-0.5 flex items-center justify-between border border-slate-350 select-none">
-                    <span className="text-[9px] leading-none pl-0.5">☀️</span>
-                    <div className="w-4 h-4 bg-[#0B3C91] rounded-full shadow-sm" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Feature Box 3: Internships Gig */}
-              <div className="p-4 bg-amber-50/40 border border-amber-100/50 rounded-2xl flex items-center justify-between">
-                <div className="space-y-1">
-                  <span className="text-[9px] font-extrabold text-amber-600 bg-amber-100/60 px-2.5 py-0.5 rounded-full uppercase tracking-wider">ACTIVE INTERNSHIP</span>
-                  <h4 className="text-xs font-extrabold text-slate-800 mt-1">Translation & Proofreading</h4>
-                  <p className="text-[10px] text-slate-400 font-medium">Mentorship session scheduled for tomorrow</p>
-                </div>
-                <div className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-200/50 flex items-center justify-center text-amber-600 text-xs font-extrabold">
-                  ✍️
-                </div>
+            <div className="relative w-full max-w-[480px] aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] border-4 border-[#0f172a] rounded-[2rem] shadow-[8px_8px_0_0_#0f172a] overflow-hidden bg-slate-100 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={heroIndex}
+                  src={heroImages[heroIndex]}
+                  alt={`Vidyatraa Platform Hero ${heroIndex + 1}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="w-full h-full object-cover rounded-[1.8rem]"
+                />
+              </AnimatePresence>
+
+              {/* Navigation Dot Indicators */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2.5 z-20 bg-[#0f172a]/80 px-4 py-1.5 rounded-full border border-slate-700/50 backdrop-blur-sm">
+                {heroImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setHeroIndex(idx)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-350 ${
+                      heroIndex === idx ? "bg-white scale-120" : "bg-white/40 hover:bg-white/70"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
